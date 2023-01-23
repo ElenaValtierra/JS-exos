@@ -34,6 +34,4 @@ document.addEventListener('keydown', (e)=>{
     if(keyvalue === 'Escape' && !modal.classList.contains('hidden' )){   
             closeModal();
     }
-
-
 });
