@@ -25,3 +25,15 @@ btnCloseModal.addEventListener('click', closeModal);
 
 // When clicking the overlay exterior modal and overlay disappear
 overlay.addEventListener('click', closeModal);
+
+
+document.addEventListener('keydown', (e)=>{
+    console.log('A key was pressed', e);
+    const keyvalue = e.key;
+    console.log(keyvalue, typeof keyvalue);
+    if(keyvalue === 'Escape' && !modal.classList.contains('hidden' )){   
+            closeModal();
+    }
+
+
+});
