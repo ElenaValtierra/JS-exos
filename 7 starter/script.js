@@ -26,13 +26,30 @@ score0El.textContent = 0;
 score1El.textContent = 0;
 diceEl.classList.add('hidden');
 
+//  Scoping
+// * Define empty variables 
 
+let scores, currentScore, activePlayer, playing;
 
+const init = function (){
+scores = [0, 0];
+currentScore = 0;
+activePlayer = 0;
+playing = true;
 
+score0El.textContent = 0;
+score1El.textContent = 0;
+current0El.textContent = 0;
+current1El.textContent = 0;
 
-const scores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
+player0El.classList.remove('player--winner');
+player1El.classList.remove('player--winner');
+player0El.classList.add('player--active');
+player1El.classList.remove('player--active');
+
+}
+
+init();
 
 const switchPlayer = () => {
     // switch to next player
@@ -48,33 +65,34 @@ const switchPlayer = () => {
 
 // Rolling dice functionality
 btnRoll.addEventListener('click', () => {
-    // 1. Generating a random dice roll
-    let dice = Math.trunc(Math.random() * 6) + 1;
-    console.log(dice);
+    if(playing){
+            // 1. Generating a random dice roll
+        let dice = Math.trunc(Math.random() * 6) + 1;
+        console.log(dice);
 
-    // 2. Display dice
-    diceEl.classList.remove('hidden');
-    diceEl.src = `dice-${dice}.png`;
+        // 2. Display dice
+        diceEl.classList.remove('hidden');
+        diceEl.src = `dice-${dice}.png`;
 
-    // 3. Check if rolled is 1 (you have to do the most common first)
-    if (dice !== 1) {
-        // Add dice to current score
-        currentScore += dice;
+        // 3. Check if rolled is 1 (you have to do the most common first)
+        if (dice !== 1) {
+            // Add dice to current score
+            currentScore += dice;
 
-        document.getElementById(`current--${activePlayer}`).textContent = currentScore;
-        // current0El.textContent = currentScore; // ! Change later as we want to make it dynamic depending on player
+            document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+            // current0El.textContent = currentScore; // ! Change later as we want to make it dynamic depending on player
 
-    } else {
-        switchPlayer();
+        } else {
+            switchPlayer();
+        }
     }
-
-    // while it is player one add to its points else add 
-    // currentScorePlayer0
+    
 });
 
 
 btnhold.addEventListener('click', () => {
-    // 1. Add current score to the score of the active player's score
+    if(playing){
+     // 1. Add current score to the score of the active player's score
     scores[activePlayer] += currentScore;
 
     // Display score
@@ -83,16 +101,25 @@ btnhold.addEventListener('click', () => {
 
     // 2. Check if the player's score is >=100
 
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
+        playing = false;
         document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
         document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+        diceEl.classList.add('hidden');
     } else {
         // Switch to next player
         switchPlayer();
+    }   
     }
-
-
+    
 });
 
-// State conditions to continue playing or not
+// State variable: conditions to continue playing or not -> playing
+
+btnNew.addEventListener('click', ()=>{
+    if(!playing){
+        init();
+    }
+
+})
 
