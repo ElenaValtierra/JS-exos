@@ -151,41 +151,67 @@
 // console.log('Me: ',me);
 // console.log('Friend: ',friend);
 
-// Primitive types
-let lastName = 'Williams';
-let oldLastName = lastName;
+// // Primitive types
+// let lastName = 'Williams';
+// let oldLastName = lastName;
 
-lastName = 'Davis';
-console.log(lastName, oldLastName);
+// lastName = 'Davis';
+// console.log(lastName, oldLastName);
 
-// Reference types
-const jessica = {
-    firstName: 'Jessica',
-    lastName: 'Williams',
-    age : 27
+// // Reference types
+// const jessica = {
+//     firstName: 'Jessica',
+//     lastName: 'Williams',
+//     age : 27
+// };
+
+// const marriedJessica = jessica;
+
+// marriedJessica.lastName = 'Davis';
+
+// // console.log('Before marriage', jessica);
+// // console.log('After marriage', marriedJessica);
+
+// // Copying objects
+
+// const jessica2 = {
+//     firstName: 'Jessica',
+//     lastName: 'Williams',
+//     age : 27,
+//     family: ['Alice', 'Bob']
+// };
+
+// const jessicaCopy = Object.assign({}, jessica2); // properties copied from the original // ? shallow copy made (copies the first level not the array if modified)
+// jessicaCopy.lastName = 'Davis';
+// jessicaCopy.family.push('Maxime', 'Antoine');
+
+// console.log('Before marriage', jessica2);
+// console.log('After marriage', jessicaCopy);
+
+// // todo Deep clone with libary
+
+// * Destructying Arrays ******
+
+const restaurant = {
+    name: 'Classico Italiano',
+    location: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+    starterMenu: ['Focaccia', 'Bruchetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 };
 
-const marriedJessica = jessica;
+const arr = [2, 3, 4];
+const a = arr[0];
+const b = arr[1];
+const c = arr[2];
 
-marriedJessica.lastName = 'Davis';
+const [x, y, z] = arr;
+console.log(x, y, z);
 
-// console.log('Before marriage', jessica);
-// console.log('After marriage', marriedJessica);
 
-// Copying objects
+let [main, , secondary] = restaurant.categories;
+console.log(main, secondary);
 
-const jessica2 = {
-    firstName: 'Jessica',
-    lastName: 'Williams',
-    age : 27,
-    family: ['Alice', 'Bob']
-};
+[main, secondary] = [secondary, main];
 
-const jessicaCopy = Object.assign({}, jessica2); // properties copied from the original // ? shallow copy made (copies the first level not the array if modified)
-jessicaCopy.lastName = 'Davis';
-jessicaCopy.family.push('Maxime', 'Antoine');
-
-console.log('Before marriage', jessica2);
-console.log('After marriage', jessicaCopy);
-
-// todo Deep clone with libary
+console.log(main, secondary);
