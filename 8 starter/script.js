@@ -198,6 +198,9 @@ const restaurant = {
     categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
     starterMenu: ['Focaccia', 'Bruchetta', 'Garlic Bread', 'Caprese Salad'],
     mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+    order: function(starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.starterMenu[mainIndex]];
+    }
 };
 
 const arr = [2, 3, 4];
@@ -215,3 +218,22 @@ console.log(main, secondary);
 [main, secondary] = [secondary, main];
 
 console.log(main, secondary);
+
+// Check if the medoth is working
+console.log(restaurant.order(2, 0));
+
+// Receive 2 return values from the function
+const [starter, maincourse] = restaurant.order(2, 0);
+console.log(starter, maincourse);
+
+const nested = [2, 4, [5, 6]];
+// const [i, , j] = nested;
+// console.log(i, j);
+// *destructure within the destructuring
+const [i, , [j, k]] = nested;
+console.log(i, j, k);
+
+// Default values when we do not know the array's length
+
+const [p = 1, q = 1, r = 1] = [8, 9];
+console.log(p, q, r); // r is undefined if we do not equal it to one = 1
