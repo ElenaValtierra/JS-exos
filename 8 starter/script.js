@@ -190,7 +190,9 @@
 
 // // todo Deep clone with libary
 
-// * Destructying Arrays ******
+
+
+
 
 const restaurant = {
     name: 'Classico Italiano',
@@ -198,42 +200,110 @@ const restaurant = {
     categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
     starterMenu: ['Focaccia', 'Bruchetta', 'Garlic Bread', 'Caprese Salad'],
     mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+    openingHours: {
+        thu: {
+            open: 12,
+            close: 22,
+        },
+        fri: {
+            open: 11,
+            close: 23,
+        },
+        sat: {
+            open: 0,
+            close: 24,
+        }
+    },
     order: function(starterIndex, mainIndex) {
         return [this.starterMenu[starterIndex], this.starterMenu[mainIndex]];
-    }
+    },
+    orderDelivery: function({ starterIndex, mainIndex = 1, time = '20:30', address }) { // We passed one argument (the object)
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time} in ${address}`);
+    },
 };
 
-const arr = [2, 3, 4];
-const a = arr[0];
-const b = arr[1];
-const c = arr[2];
+restaurant.orderDelivery({
+    time: '22:30',
+    address: 'Via del Sole, 21',
+    mainIndex: 2,
+    starterIndex: 2,
+});
 
-const [x, y, z] = arr;
-console.log(x, y, z);
+// If no time main idex then one can be asigned inthe objet received by default bu "= 1" or "20:30"
+restaurant.orderDelivery({
+    address: 'Via del Sole, 21',
+    starterIndex: 1,
+})
 
 
-let [main, , secondary] = restaurant.categories;
-console.log(main, secondary);
 
-[main, secondary] = [secondary, main];
+// * Destructuring Objects ***
+// * /////////////////////////////
+// Order does not matter in objects
+const { name, openingHours, categories } = restaurant;
 
-console.log(main, secondary);
+console.log(name, openingHours, categories);
 
-// Check if the medoth is working
-console.log(restaurant.order(2, 0));
+const { name: restaurantName, openingHours: hours, categories: tags } = restaurant;
 
-// Receive 2 return values from the function
-const [starter, maincourse] = restaurant.order(2, 0);
-console.log(starter, maincourse);
+console.log(restaurantName, hours, tags);
 
-const nested = [2, 4, [5, 6]];
-// const [i, , j] = nested;
-// console.log(i, j);
-// *destructure within the destructuring
-const [i, , [j, k]] = nested;
-console.log(i, j, k);
+// Mutaling variables
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+console.log(a, b);
+({ a, b } = obj);
+console.log(a, b);
 
-// Default values when we do not know the array's length
+// Nested objects
+const { fri } = openingHours; // To have access to opening hours you have tu destructure it befere.
+console.log(fri);
 
-const [p = 1, q = 1, r = 1] = [8, 9];
-console.log(p, q, r); // r is undefined if we do not equal it to one = 1
+const { open } = fri;
+console.log(open);
+
+
+
+
+
+
+
+
+// * Destructying Arrays ******
+// * /////////////////////////////
+
+// const arr = [2, 3, 4];
+// const a = arr[0];
+// const b = arr[1];
+// const c = arr[2];
+
+// const [x, y, z] = arr;
+// console.log(x, y, z);
+
+
+// let [main, , secondary] = restaurant.categories;
+// console.log(main, secondary);
+
+// [main, secondary] = [secondary, main];
+
+// console.log(main, secondary);
+
+// // Check if the medoth is working
+// console.log(restaurant.order(2, 0));
+
+// // Receive 2 return values from the function
+// const [starter, maincourse] = restaurant.order(2, 0);
+// console.log(starter, maincourse);
+
+// const nested = [2, 4, [5, 6]];
+// // const [i, , j] = nested;
+// // console.log(i, j);
+// // *destructure within the destructuring
+// const [i, , [j, k]] = nested;
+// console.log(i, j, k);
+
+// // Default values when we do not know the array's length
+
+// const [p = 1, q = 1, r = 1] = [8, 9];
+// console.log(p, q, r); // r is undefined if we do not equal it to one = 1
