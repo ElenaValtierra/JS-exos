@@ -220,6 +220,9 @@ const restaurant = {
     orderDelivery: function({ starterIndex, mainIndex = 1, time = '20:30', address }) { // We passed one argument (the object)
         console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time} in ${address}`);
     },
+    orderPasta: function(ing1, ing2, ing3) {
+        console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+    }
 };
 
 restaurant.orderDelivery({
@@ -235,33 +238,69 @@ restaurant.orderDelivery({
     starterIndex: 1,
 })
 
+// *Spread operator
+// * ///////////////////////
+
+const arr = [7, 8, 9];
+// add an array to a new array (before):
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
+
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+console.log(...newArr);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// Copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+// jpin two arrays together
+// Main menu and starter menu
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+// Real world example 
+const ingredients = [
+    // prompt(`Let's maake pasta! Ingredient 1?`),
+    // prompt(`Ingredient 2?`),
+    // prompt(`Ingredient 3?`)
+];
+console.log(ingredients);
+restaurant.orderPasta(...ingredients);
+
+// Objects are not iterable
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
+console.log(newRestaurant);
 
 
 // * Destructuring Objects ***
 // * /////////////////////////////
 // Order does not matter in objects
-const { name, openingHours, categories } = restaurant;
+// const { name, openingHours, categories } = restaurant;
 
-console.log(name, openingHours, categories);
+// console.log(name, openingHours, categories);
 
-const { name: restaurantName, openingHours: hours, categories: tags } = restaurant;
+// const { name: restaurantName, openingHours: hours, categories: tags } = restaurant;
 
-console.log(restaurantName, hours, tags);
+// console.log(restaurantName, hours, tags);
 
-// Mutaling variables
-let a = 111;
-let b = 999;
-const obj = { a: 23, b: 7, c: 14 };
-console.log(a, b);
-({ a, b } = obj);
-console.log(a, b);
+// // Mutaling variables
+// let a = 111;
+// let b = 999;
+// const obj = { a: 23, b: 7, c: 14 };
+// console.log(a, b);
+// ({ a, b } = obj);
+// console.log(a, b);
 
-// Nested objects
-const { fri } = openingHours; // To have access to opening hours you have tu destructure it befere.
-console.log(fri);
+// // Nested objects
+// const { fri } = openingHours; // To have access to opening hours you have tu destructure it befere.
+// console.log(fri);
 
-const { open } = fri;
-console.log(open);
+// const { open } = fri;
+// console.log(open);
 
 
 
