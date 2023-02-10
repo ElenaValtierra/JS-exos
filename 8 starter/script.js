@@ -222,6 +222,9 @@ const restaurant = {
     },
     orderPasta: function(ing1, ing2, ing3) {
         console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+    },
+    orderPizza: function(mainIngredient, ...otherIngredients) {
+        console.log(mainIngredient, otherIngredients);
     }
 };
 
@@ -234,46 +237,76 @@ restaurant.orderDelivery({
 
 // If no time main idex then one can be asigned inthe objet received by default bu "= 1" or "20:30"
 restaurant.orderDelivery({
-    address: 'Via del Sole, 21',
-    starterIndex: 1,
-})
+        address: 'Via del Sole, 21',
+        starterIndex: 1,
+    })
+    // * Rest Pattern and Rest Operator
+    // * ///////////////////////
+    //  In arrays
+const [Focaccia, , ...others] = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(Focaccia, others);
+
+// In objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+//  2. Functions
+const add = function(...numbers) {
+    console.log(numbers);
+    // let sum = 0;
+    // for (let i = 0; i < numbers.length; i++)
+    //     sum += numbers[i];
+    // console.log(sum);
+};
+
+add(0, 4);
+add(1, 4);
+
+const x = [23, 5, 7];
+// console.log(...x);
+add(...x);
+
+restaurant.orderPizza('Mushrooms', 'Onions', 'Spinach');
+
+
+
 
 // *Spread operator
 // * ///////////////////////
 
-const arr = [7, 8, 9];
-// add an array to a new array (before):
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(badNewArr);
+// const arr = [7, 8, 9];
+// // add an array to a new array (before):
+// const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+// console.log(badNewArr);
 
-const newArr = [1, 2, ...arr];
-console.log(newArr);
-console.log(...newArr);
+// const newArr = [1, 2, ...arr];
+// console.log(newArr);
+// console.log(...newArr);
 
-const newMenu = [...restaurant.mainMenu, 'Gnocci'];
-console.log(newMenu);
+// const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+// console.log(newMenu);
 
-// Copy array
-const mainMenuCopy = [...restaurant.mainMenu];
-console.log(mainMenuCopy);
+// // Copy array
+// const mainMenuCopy = [...restaurant.mainMenu];
+// console.log(mainMenuCopy);
 
-// jpin two arrays together
-// Main menu and starter menu
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(menu);
+// // jpin two arrays together
+// // Main menu and starter menu
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// console.log(menu);
 
-// Real world example 
-const ingredients = [
-    // prompt(`Let's maake pasta! Ingredient 1?`),
-    // prompt(`Ingredient 2?`),
-    // prompt(`Ingredient 3?`)
-];
-console.log(ingredients);
-restaurant.orderPasta(...ingredients);
+// // Real world example 
+// const ingredients = [
+//     // prompt(`Let's maake pasta! Ingredient 1?`),
+//     // prompt(`Ingredient 2?`),
+//     // prompt(`Ingredient 3?`)
+// ];
+// console.log(ingredients);
+// restaurant.orderPasta(...ingredients);
 
-// Objects are not iterable
-const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
-console.log(newRestaurant);
+// // Objects are not iterable
+// const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
+// console.log(newRestaurant);
 
 
 // * Destructuring Objects ***
