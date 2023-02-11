@@ -235,40 +235,54 @@ restaurant.orderDelivery({
     starterIndex: 2,
 });
 
-// If no time main idex then one can be asigned inthe objet received by default bu "= 1" or "20:30"
-restaurant.orderDelivery({
-        address: 'Via del Sole, 21',
-        starterIndex: 1,
-    })
-    // * Rest Pattern and Rest Operator
-    // * ///////////////////////
-    //  In arrays
-const [Focaccia, , ...others] = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(Focaccia, others);
+// // If no time main idex then one can be asigned inthe objet received by default bu "= 1" or "20:30"
+// restaurant.orderDelivery({
+//         address: 'Via del Sole, 21',
+//         starterIndex: 1,
+//     })
+//     // * Rest Pattern and Spread Operator
+//     // * ///////////////////////
+//     //  In arrays
+// const [Focaccia, , ...others] = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// console.log(Focaccia, others);
 
-// In objects
-const { sat, ...weekdays } = restaurant.openingHours;
-console.log(weekdays);
+// // In objects
+// const { sat, ...weekdays } = restaurant.openingHours;
+// console.log(weekdays);
 
-//  2. Functions
-const add = function(...numbers) {
-    console.log(numbers);
-    // let sum = 0;
-    // for (let i = 0; i < numbers.length; i++)
-    //     sum += numbers[i];
-    // console.log(sum);
-};
+// //  2. Functions
+// const add = function(...numbers) {
+//     console.log(numbers);
+//     // let sum = 0;
+//     // for (let i = 0; i < numbers.length; i++)
+//     //     sum += numbers[i];
+//     // console.log(sum);
+// };
 
-add(0, 4);
-add(1, 4);
+// add(0, 4);
+// add(1, 4);
 
-const x = [23, 5, 7];
-// console.log(...x);
-add(...x);
+// const x = [23, 5, 7];
+// // console.log(...x);
+// add(...x);
 
-restaurant.orderPizza('Mushrooms', 'Onions', 'Spinach');
+// restaurant.orderPizza('Mushrooms', 'Onions', 'Spinach');
 
+// *Short Circuiting
+// * ///////////////////////
+//  OR ||
+console.log(undefined || '' || 0 || 'Hello' || 23 || null); // Will stop at the first truethy value or the last faly if none is true -> 'Hello
+console.log(null || '' || 0 || undefined || 23 || 'Hello'); // 23
 
+// AND &&
+console.log(23 && 'Hello' && null && '' && 0 && undefined); // Will stop at the first false value -> null
+
+restaurant.numGuests = 0;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1); // Even though numberGuests is 0 it is considered falsy.
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
 
 
 // *Spread operator
