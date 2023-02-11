@@ -268,21 +268,32 @@ restaurant.orderDelivery({
 
 // restaurant.orderPizza('Mushrooms', 'Onions', 'Spinach');
 
+// *Nullish Coalesing Operator (??)
+// * ///////////////////////
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+// prettier-ignore 
+// The Nullish operator makes 0 and '' NOT falsey values -> only if it gives null or undefined
+const guestsCorrect = restaurant.numGuests ? ? 10;
+console.log(guests);
+
 // *Short Circuiting
 // * ///////////////////////
 //  OR ||
-console.log(undefined || '' || 0 || 'Hello' || 23 || null); // Will stop at the first truethy value or the last faly if none is true -> 'Hello
-console.log(null || '' || 0 || undefined || 23 || 'Hello'); // 23
+// console.log(undefined || '' || 0 || 'Hello' || 23 || null); // Will stop at the first truethy value or the last faly if none is true -> 'Hello
+// console.log(null || '' || 0 || undefined || 23 || 'Hello'); // 23
 
-// AND &&
-console.log(23 && 'Hello' && null && '' && 0 && undefined); // Will stop at the first false value -> null
+// // AND &&
+// console.log(23 && 'Hello' && null && '' && 0 && undefined); // Will stop at the first false value -> null
 
-restaurant.numGuests = 0;
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guests1); // Even though numberGuests is 0 it is considered falsy.
+// restaurant.numGuests = 0;
+// const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// console.log(guests1); // Even though numberGuests is 0 it is considered falsy.
 
-const guests2 = restaurant.numGuests || 10;
-console.log(guests2);
+// const guests2 = restaurant.numGuests || 10;
+// console.log(guests2);
 
 
 // *Spread operator
