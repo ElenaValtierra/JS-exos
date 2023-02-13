@@ -235,6 +235,42 @@ restaurant.orderDelivery({
     starterIndex: 2,
 });
 
+// * Logical Asignment operator
+// * ///////////////////////
+
+// const rest1 ={
+//     name: 'Capri',
+//     numGuests: 20,
+
+// };
+
+// const rest2 = {
+//     name: 'La Piazza',
+//     owner: 'Giovanni Rossi',
+// };
+// // Or assignment operator 
+// // rest1.numGuests = rest1.numGuests || 10;
+// // rest2.numGuests = rest2.numGuests || 10;
+
+// // rest1.numGuests ||= 10;
+// // rest2.numGuests ||= 10;
+
+// // Nullish assignment operator (if null or undefined)
+// rest1.numGuests ??= 10;
+// rest2.numGuests ??= 10;
+
+// console.log(rest1);
+// console.log(rest2);
+
+// rest1.owner = rest1.owner && '<ANONYMOUS>'; // Undefined -> && ggives the first falsey value so owner is true but no anonynous
+// rest2.owner = rest2.owner && '<ANONYMOUS>'; // gives back '<ANONYMOUS>' as .owner does not exist
+
+// rest1.owner &&= '<ANONYMOUS>';
+// rest2.owner &&= '<ANONYMOUS>';
+
+// console.log(rest1);
+// console.log(rest2);
+
 // // If no time main idex then one can be asigned inthe objet received by default bu "= 1" or "20:30"
 // restaurant.orderDelivery({
 //         address: 'Via del Sole, 21',
@@ -270,14 +306,14 @@ restaurant.orderDelivery({
 
 // *Nullish Coalesing Operator (??)
 // * ///////////////////////
-restaurant.numGuests = 0;
-const guests = restaurant.numGuests || 10;
-console.log(guests);
+// restaurant.numGuests = 0;
+// const guests = restaurant.numGuests || 10;
+// console.log(guests);
 
-// prettier-ignore 
-// The Nullish operator makes 0 and '' NOT falsey values -> only if it gives null or undefined
-const guestsCorrect = restaurant.numGuests ? ? 10;
-console.log(guests);
+// // prettier-ignore 
+// // The Nullish operator makes 0 and '' NOT falsey values -> only if it gives null or undefined
+// const guestsCorrect = restaurant.numGuests ?? 10;
+// console.log(guestsCorrect);
 
 // *Short Circuiting
 // * ///////////////////////
@@ -404,3 +440,56 @@ console.log(guests);
 
 // const [p = 1, q = 1, r = 1] = [8, 9];
 // console.log(p, q, r); // r is undefined if we do not equal it to one = 1
+
+
+// * ** Coding Challenge 1 **
+
+const game = {
+    team1: 'Bayern Munich',
+    team2: 'Borrussia Dortmund',
+    players: [
+    [
+    'Neuer',
+    'Pavard',
+    'Martinez',
+    'Alaba',
+    'Davies',
+    'Kimmich',
+    'Goretzka',
+    'Coman',
+    'Muller',
+    'Gnarby',
+    'Lewandowski',
+    ],
+    [
+    'Burki',
+    'Schulz',
+    'Hummels',
+    'Akanji',
+    'Hakimi',
+    'Weigl',
+    'Witsel',
+    'Hazard',
+    'Brandt',
+    'Sancho',
+    'Gotze',
+    ],
+    ],
+    score: '4:0',
+    scored: ['Lewandowski', 'Gnarby', 'Lewandowski',
+    'Hummels'],
+    date: 'Nov 9th, 2037',
+    odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+    },
+    };
+   
+    const player1 = [];// goalKeeper[0] -> one player array
+    const player2 = []; // goalKeeper[0]
+
+    const gk = []; // goalkeepers name
+    const fieldPlayers = []; // remaining 10 field players
+
+    const allPlayers = []; // both teams of a total of 22 players
