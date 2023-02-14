@@ -486,10 +486,38 @@ const game = {
     },
     };
    
-    const player1 = [];// goalKeeper[0] -> one player array
-    const player2 = []; // goalKeeper[0]
+    // * 1. Create one player array for each team (variables 'players1' and 'players2')
+    const players1 = game.players[0];
+    console.log(players1);
+    const players2 = game.players[1];
+    console.log(players2);
+    // * 2.  The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players
+    
+    let goalKeeper, rest;
+    let fieldPlayersRest = [goalKeeper, ...rest] = players1;
 
-    const gk = []; // goalkeepers name
-    const fieldPlayers = []; // remaining 10 field players
+    const gk = goalKeeper;
+    console.log(gk);
 
-    const allPlayers = []; // both teams of a total of 22 players
+    const fieldPlayers = rest;
+    console.log(rest);
+
+    // * 3. Create an array 'allPlayers' containing all players of both teams (22 players)
+    const allPlayers = [...players1, ...players2];
+    console.log(allPlayers);
+
+    // * 4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a new array ('players1Final') containing all the original team1 players plus 'Thiago', 'Coutinho' and 'Perisic'
+    const players1Final = [...players1, 'Thiago', 'Coutinho' , 'Perisic'];
+    console.log(players1Final);
+
+    // * 5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
+    // ? let team1, draw, team2;
+    // ({team1, draw, team2} = game.odds);
+    // console.log(game.odds);
+
+    // const player2 = []; // goalKeeper[0]
+
+    // const gk = []; // goalkeepers name
+    // const fieldPlayers = []; // remaining 10 field players
+
+    // const allPlayers = []; // both teams of a total of 22 players
