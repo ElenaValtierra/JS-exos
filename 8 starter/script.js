@@ -511,9 +511,63 @@ const game = {
     console.log(players1Final);
 
     // * 5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
-    // ? let team1, draw, team2;
-    // ({team1, draw, team2} = game.odds);
-    // console.log(game.odds);
+     let team1, draw, team2;
+    ({team1, x: draw, team2} = game.odds);
+    console.log(draw);
+
+    // * 6. Write a function ('printGoals') that receives an arbitrary number of player names (not an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
+    // 6.1 Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
+
+    const printGoals = function( numbPlayers, ...numbGoals){ // putting the spread back in an array - rest
+       let sum = 0;
+        console.log(numbGoals);
+        console.log(...numbPlayers);
+
+        for(let i =0; i<numbGoals.length; i++){
+            sum += numbGoals[i];
+        }
+        console.log(sum);
+        
+    };
+
+    const playersNames = ['Davies', 'Muller', 'Lewandowski', 'Kimmich'];
+    const goals = [1, 3, 4, 5];
+    console.log(...goals);// destructuring array - spread
+
+    printGoals(...playersNames,...goals);
+    printGoals(playersNames);
+
+
+    // * 7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, without using an if/else statement or the ternary operator
+
+    const team1a = game.odds.team1 < game.odds.team2;
+    const team2a = game.odds.team2 < game.odds.team1;
+
+
+    console.log(team1a);
+    console.log(team2a);
+
+    // console.log(team1a || team2a = 'hemmp');
+
+// rest1.numGuests ??= 10;
+// rest2.numGuests ??= 10;
+
+// console.log(rest1);
+// console.log(rest2);
+
+// rest1.owner = rest1.owner && '<ANONYMOUS>'; // Undefined -> && ggives the first falsey value so owner is true but no anonynous
+// rest2.owner = rest2.owner && '<ANONYMOUS>'; // gives back '<ANONYMOUS>' as .owner does not exist
+
+// rest1.owner &&= '<ANONYMOUS>';
+// rest2.owner &&= '<ANONYMOUS>';
+
+// console.log(rest1);
+// console.log(rest2);
+
+    // console.log(game.odds.team1 &&= '<Team 1>' );
+    // console.log(game.odds.team2 &&= '<Team 2>' );
+
+
 
     // const player2 = []; // goalKeeper[0]
 
