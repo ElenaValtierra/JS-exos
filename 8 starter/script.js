@@ -486,21 +486,17 @@ const game = {
     },
     };
    
-    // * 1. Create one player array for each team (variables 'players1' and 'players2')
-    const players1 = game.players[0];
-    console.log(players1);
-    const players2 = game.players[1];
-    console.log(players2);
+    // * 1. Create one player array for each team (variables 'players1' and 'players2') -> destructuring
+
+    const [players1, players2] = game.players;
+    console.log(players1, players2);
+
     // * 2.  The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players
-    
-    let goalKeeper, rest;
-    let fieldPlayersRest = [goalKeeper, ...rest] = players1;
 
-    const gk = goalKeeper;
-    console.log(gk);
+    // The rest syntax will put fieldPlayers in an array
+    const [gk, ...fieldPlayers] = players1;
+    console.log(gk, fieldPlayers);
 
-    const fieldPlayers = rest;
-    console.log(rest);
 
     // * 3. Create an array 'allPlayers' containing all players of both teams (22 players)
     const allPlayers = [...players1, ...players2];
@@ -515,37 +511,25 @@ const game = {
     ({team1, x: draw, team2} = game.odds);
     console.log(draw);
 
+    // const {odds: {team1,x:draw, team2},} = game;
+    // console.log(draw);
+
     // * 6. Write a function ('printGoals') that receives an arbitrary number of player names (not an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
     // 6.1 Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
 
-    const printGoals = function( numbPlayers, ...numbGoals){ // putting the spread back in an array - rest
-       let sum = 0;
-        console.log(numbGoals);
-        console.log(...numbPlayers);
-
-        for(let i =0; i<numbGoals.length; i++){
-            sum += numbGoals[i];
-        }
-        console.log(sum);
+    const printGoals = function(...players){ // putting the spread back in an array - rest
+        console.log(players);
+        console.log(`The number of players are ${players.length}`);
         
     };
 
-    const playersNames = ['Davies', 'Muller', 'Lewandowski', 'Kimmich'];
-    const goals = [1, 3, 4, 5];
-    console.log(...goals);// destructuring array - spread
 
-    printGoals(...playersNames,...goals);
-    printGoals(playersNames);
-
+    printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+    printGoals(...game.scored);
 
     // * 7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, without using an if/else statement or the ternary operator
-
-    const team1a = game.odds.team1 < game.odds.team2;
-    const team2a = game.odds.team2 < game.odds.team1;
-
-
-    console.log(team1a);
-    console.log(team2a);
+    team1 < team2 && console.log('Team 1 is more likely to win'); // In exo 5 we give access to team1 and team2 -> the && condition is only effective if it is true.
+    team2 < team1 && console.log('Team 2 is more likely to win');
 
     // console.log(team1a || team2a = 'hemmp');
 
