@@ -98,7 +98,20 @@ const flights =
 //   team1 < team2 && console.log('Team 1 is more likely to win'); // In exo 5 we give access to team1 and team2 -> the && condition is only effective if it is true.
 //   team2 < team1 && console.log('Team 2 is more likely to win');
 
-
+const  openingHours= {
+  thu: {
+      open: 12,
+      close: 22,
+  },
+  fri: {
+      open: 11,
+      close: 23,
+  },
+  sat: {
+      open: 0,
+      close: 24,
+  }
+};
 
 
 const restaurant = {
@@ -107,21 +120,10 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruchetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  openingHours: {
-      thu: {
-          open: 12,
-          close: 22,
-      },
-      fri: {
-          open: 11,
-          close: 23,
-      },
-      sat: {
-          open: 0,
-          close: 24,
-      }
-  },
-  order: function(starterIndex, mainIndex) {
+  // Instead of writing openingHours: openingHours, if it has the same name you can write it only once
+  openingHours,
+  // The method can also be witten like this:
+  order(starterIndex, mainIndex) {
       return [this.starterMenu[starterIndex], this.starterMenu[mainIndex]];
   },
   orderDelivery: function({ starterIndex, mainIndex = 1, time = '20:30', address }) { // We passed one argument (the object)
@@ -141,17 +143,41 @@ restaurant.orderDelivery({
   mainIndex: 2,
   starterIndex: 2,
 });
+// * Opional Chaining **********************
+//  * //////////////////////////////////////////
+// If mon does not exist instead of returning an error it will show undefined
+console.log(restaurant.openingHours.mon?.open);  
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+// Methods
+for(const day of days){
+  // console.log(day);
+  //  Getting the index dynamically from the array days
+    // If it is undefined then it will use the OR operator to show closed
+  const open = restaurant.openingHours[day]?.open || 'closed';
+  console.log(`On day ${day} the opening time is ${open}`)
+}
+
+console.log(restaurant.order?.(0,1) ?? 'Method does not exist');
+console.log(restaurant.orders?.(0,1) ?? 'Method does not exist'); //does not exist
+
+// Arrays
+// const users = [{name:'Elena', email:'hello@elena.com'}];
+const users = [];
+console.log(users[0]?.name ?? 'Array empty');
+
 
 // * Looping Arrays: the for-of loop
 //  Looping the whole menu
 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(menu);
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// console.log(menu);
 
-for(const item of menu) console.log(item);
-// To get the position we access the parameters .entries that will give the position and then the
+// for(const item of menu) console.log(item);
+// // To get the position we access the parameters .entries that will give the position and then the
 
-// console.log(menu.entries());
-for(const [i, element] of menu.entries()){// we destructure it
-  console.log(`${i+1}: ${element}`); // To get a list that starts at one
-} 
+// // console.log(menu.entries());
+// for(const [i, element] of menu.entries()){// we destructure it
+//   console.log(`${i+1}: ${element}`); // To get a list that starts at one
+// } 
