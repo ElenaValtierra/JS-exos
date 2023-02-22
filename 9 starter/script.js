@@ -136,36 +136,66 @@ const restaurant = {
       console.log(mainIngredient, otherIngredients);
   }
 };
+// * Looping Objects **********************
+//  * //////////////////////////////////////////
 
-restaurant.orderDelivery({
-  time: '22:30',
-  address: 'Via del Sole, 21',
-  mainIndex: 2,
-  starterIndex: 2,
-});
+// Property names - keys
+const properties = Object.keys(openingHours);
+console.log(properties);// It is an array
+let openStr = `We are open on ${properties.length} days: `;
+
+for (const day of properties){
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// Property names - Values
+const values = Object.values(openingHours);
+console.log(values);// It is an array with the object's values 
+
+for(const hour of values){
+  console.log(hour.open);
+}
+
+//Entire object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for(const [key, {open,close}] of entries){
+  // console.log();
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
+
+
+// restaurant.orderDelivery({
+//   time: '22:30',
+//   address: 'Via del Sole, 21',
+//   mainIndex: 2,
+//   starterIndex: 2,
+// });
 // * Opional Chaining **********************
 //  * //////////////////////////////////////////
 // If mon does not exist instead of returning an error it will show undefined
-console.log(restaurant.openingHours.mon?.open);  
+// console.log(restaurant.openingHours.mon?.open);  
 
-const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+// const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
-// Methods
-for(const day of days){
-  // console.log(day);
-  //  Getting the index dynamically from the array days
-    // If it is undefined then it will use the OR operator to show closed
-  const open = restaurant.openingHours[day]?.open || 'closed';
-  console.log(`On day ${day} the opening time is ${open}`)
-}
+// // Methods
+// for(const day of days){
+//   // console.log(day);
+//   //  Getting the index dynamically from the array days
+//     // If it is undefined then it will use the OR operator to show closed
+//   const open = restaurant.openingHours[day]?.open || 'closed';
+//   console.log(`On day ${day} the opening time is ${open}`)
+// }
 
-console.log(restaurant.order?.(0,1) ?? 'Method does not exist');
-console.log(restaurant.orders?.(0,1) ?? 'Method does not exist'); //does not exist
+// console.log(restaurant.order?.(0,1) ?? 'Method does not exist');
+// console.log(restaurant.orders?.(0,1) ?? 'Method does not exist'); //does not exist
 
-// Arrays
-// const users = [{name:'Elena', email:'hello@elena.com'}];
-const users = [];
-console.log(users[0]?.name ?? 'Array empty');
+// // Arrays
+// // const users = [{name:'Elena', email:'hello@elena.com'}];
+// const users = [];
+// console.log(users[0]?.name ?? 'Array empty');
 
 
 // * Looping Arrays: the for-of loop
