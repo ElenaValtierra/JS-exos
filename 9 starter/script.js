@@ -145,19 +145,33 @@ console.log(`-----EXO 3----`);
 // 3.1 Get the value of team 1 ad team2 -> use them as keys
 // 3.2 Get the value of odds -> use them as values
 
-const [team1, team2] = Object.values(game);
-const [team1Odds, draw, team2Odds] = Object.values(game.odds);
+// const [team1, team2] = Object.values(game);
+// const [team1Odds, draw, team2Odds] = Object.values(game.odds);
 
-console.log(team1, team2);
-console.log(team1Odds, draw, team2Odds);
+// console.log(team1, team2);
+// console.log(team1Odds, draw, team2Odds);
 
-// const gameArray = Object.entries(game);
-// console.log(gameArray);
+const gameArray = Object.entries(game);
+console.log(gameArray);
+const oddsArray = Object.entries(game.odds);
 
-for (const [i, el] of gameArray)
+for (const [key, value] of gameArray){
+  // console.log(key);
+  // console.log(value);
+  for(const [i,el] of oddsArray){
+  // console.log(i);
+  // console.log(el);
+  // (key===i || value===el) ? console.log(`Odds of victory ${i}: ${el}`) : console.log(`Odds of draw: ${el}`);
+//? const oddsStr = oddsArray[key===i || value===el || key==='x']?.i 
+  
+  // if(key===i || value===el){
+  //   console.log(`Odds of victory ${i}: ${el}`);
+  // }else if(!i == key){
+  //   console.log(`Odds of draw: ${el}`);
+  // }
+  // }
 
-  console.log(`Odds of victory `);
-
+}
 
 
 
