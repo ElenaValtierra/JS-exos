@@ -104,75 +104,86 @@ const game = {
 // * Challenge 2
 // * ///////////////////////////
 
-// 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
-console.log(`-----EXO 1----`);
+// // 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+// console.log(`-----EXO 1----`);
 
 
-const gameScored = game.scored;
-console.log(gameScored);
+// const gameScored = game.scored;
+// console.log(gameScored);
 
-for (const [i, el] of gameScored.entries()) {
-  console.log(`Goal ${i + 1}: ${el}`);
-};
+// for (const [i, el] of gameScored.entries()) {
+//   console.log(`Goal ${i + 1}: ${el}`);
+// };
 
-// 2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember
-// avrg = sum all numb/ array.length
-console.log(`-----EXO 2----`);
-const oddScore = Object.values(game.odds);
-console.log(oddScore);
+// // 2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember
+// // avrg = sum all numb/ array.length
+// console.log(`-----EXO 2----`);
+// const oddScore = Object.values(game.odds);
+// console.log(oddScore);
 
-const [a, , c] = oddScore;
-console.log(a, c);
+// const [a, , c] = oddScore;
+// console.log(a, c);
 
-const newOddScore = [a, c];
-console.log(newOddScore);
+// const newOddScore = [a, c];
+// console.log(newOddScore);
 
-let sum = 0;
-for (const value of newOddScore) {
-  sum += value;
-}
-// console.log(sum);
-let average = sum / oddScore.length;
-console.log(`The sum is ${sum} with an average of ${average}`);
+// let sum = 0;
+// for (const value of newOddScore) {
+//   sum += value;
+// }
+// // console.log(sum);
+// let average = sum / oddScore.length;
+// console.log(`The sum is ${sum} with an average of ${average}`);
 
-// 3. Print the 3 odds to the console, but in a nice formatted way, exactly like this:
-// Odd of victory Bayern Munich: 1.33
-// Odd of draw: 3.25
-// Odd of victory Borrussia Dortmund: 6.5
-// Get the team names directly from the game object, don't hardcode them (except for "draw"). Hint: Note how the odds and the game objects have the same property names
-console.log(`-----EXO 3----`);
-// STEPS:
-// 3.1 Get the value of team 1 ad team2 -> use them as keys
-// 3.2 Get the value of odds -> use them as values
+// // 3. Print the 3 odds to the console, but in a nice formatted way, exactly like this:
+// // Odd of victory Bayern Munich: 1.33
+// // Odd of draw: 3.25
+// // Odd of victory Borrussia Dortmund: 6.5
+// // Get the team names directly from the game object, don't hardcode them (except for "draw"). Hint: Note how the odds and the game objects have the same property names
+// console.log(`-----EXO 3----`);
 
-// const [team1, team2] = Object.values(game);
-// const [team1Odds, draw, team2Odds] = Object.values(game.odds);
+// for(const [team, odd] of Object.entries(game.odds)){
+//   const teamStr= team === 'x'? 'draw':`victory ${game[team]}`;
+//   console.log(`Odds of ${teamStr} ${odd}`);
+// }
 
-// console.log(team1, team2);
-// console.log(team1Odds, draw, team2Odds);
+// // * 4. Bonus: Create an object called 'scorers' which contains the names of the 
+// // players who scored as properties, and the number of goals as the value. In this 
+// // game, it will look like this:
 
-const gameArray = Object.entries(game);
-console.log(gameArray);
-const oddsArray = Object.entries(game.odds);
 
-for (const [key, value] of gameArray){
-  // console.log(key);
-  // console.log(value);
-  for(const [i,el] of oddsArray){
-  // console.log(i);
-  // console.log(el);
-  // (key===i || value===el) ? console.log(`Odds of victory ${i}: ${el}`) : console.log(`Odds of draw: ${el}`);
-//? const oddsStr = oddsArray[key===i || value===el || key==='x']?.i 
-  
-  // if(key===i || value===el){
-  //   console.log(`Odds of victory ${i}: ${el}`);
-  // }else if(!i == key){
-  //   console.log(`Odds of draw: ${el}`);
-  // }
-  // }
+// * Sets
+const orderSet = new Set([
+  'Pasta',
+  'Pasta',
+  'Risotto',
+  'Pasta',
+  'Pizza'
+]);
 
-}
+console.log(orderSet);
+console.log(orderSet.has('Pizza'));
+console.log(orderSet.has('Bread'));
+console.log(orderSet.add('Bread'));
 
+console.log(orderSet.delete('Pizza'));
+console.log(orderSet);
+
+for(const order of orderSet)
+console.log(order);
+
+const staff = [
+  'Waiter',
+  'Chef',
+  'Waiter',
+  'Manager',
+  'Chef',
+  'Waiter',
+];
+
+// const staffUnique = [...new Set(staff)];
+// console.log(staffUnique);
+console.log(new Set(staff).size);
 
 
 // const openingHours = {
@@ -289,6 +300,3 @@ for (const [key, value] of gameArray){
 // for(const [i, element] of menu.entries()){// we destructure it
 //   console.log(`${i+1}: ${element}`); // To get a list that starts at one
 // }
-
-
-
