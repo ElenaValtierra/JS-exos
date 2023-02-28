@@ -150,40 +150,73 @@ const game = {
 // // * 4. Bonus: Create an object called 'scorers' which contains the names of the 
 // // players who scored as properties, and the number of goals as the value. In this 
 // // game, it will look like this:
+// * Maps
+// * ////////////////////
+
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Fireze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+rest
+.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+.set('open', 11)
+.set('close', 23)
+.set(true, 'We are open 😊')
+.set(false, 'we are closed 😣');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+
+const time = 21;
+
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+console.log(rest.has('categories'));
+console.log(rest);
+rest.delete(2);
+console.log(rest);
+
+const arr = [1,2];
+console.log(rest.set(arr, 'Tesy test'));
+console.log(rest.get(arr));
+
+rest.set(document.querySelector('h1'), 'Heading');
 
 
 // * Sets
-const orderSet = new Set([
-  'Pasta',
-  'Pasta',
-  'Risotto',
-  'Pasta',
-  'Pizza'
-]);
+// * ////////////////////
+// const orderSet = new Set([
+//   'Pasta',
+//   'Pasta',
+//   'Risotto',
+//   'Pasta',
+//   'Pizza'
+// ]);
 
-console.log(orderSet);
-console.log(orderSet.has('Pizza'));
-console.log(orderSet.has('Bread'));
-console.log(orderSet.add('Bread'));
+// console.log(orderSet);
+// console.log(orderSet.has('Pizza'));
+// console.log(orderSet.has('Bread'));
+// console.log(orderSet.add('Bread'));
 
-console.log(orderSet.delete('Pizza'));
-console.log(orderSet);
+// console.log(orderSet.delete('Pizza'));
+// console.log(orderSet);
 
-for(const order of orderSet)
-console.log(order);
+// for(const order of orderSet)
+// console.log(order);
 
-const staff = [
-  'Waiter',
-  'Chef',
-  'Waiter',
-  'Manager',
-  'Chef',
-  'Waiter',
-];
+// const staff = [
+//   'Waiter',
+//   'Chef',
+//   'Waiter',
+//   'Manager',
+//   'Chef',
+//   'Waiter',
+// ];
 
-// const staffUnique = [...new Set(staff)];
-// console.log(staffUnique);
-console.log(new Set(staff).size);
+// // const staffUnique = [...new Set(staff)];
+// // console.log(staffUnique);
+// console.log(new Set(staff).size);
 
 
 // const openingHours = {
