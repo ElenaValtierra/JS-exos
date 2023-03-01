@@ -183,6 +183,40 @@ console.log(rest.get(arr));
 
 rest.set(document.querySelector('h1'), 'Heading');
 
+const questions = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try again!'],
+]);
+
+console.log(questions);
+
+console.log(questions.get('question'))
+for (const [key, value] of questions){
+  // console.log(key, value);
+  if(typeof key=== 'number'){
+    console.log(`Answer ${key} : ${value}`)
+  }
+};
+
+// const answer = Number(prompt('Your answer'));
+// console.log(answer);
+
+// console.log(questions.get(questions.get('correct') === answer));
+// Convert Map to array
+
+const questionsArray = [...questions]
+// console.log(questionsArray);
+// console.log(questionsArray[0][1]);
+
+// console.log(questions.entries());
+console.log(...questions.keys());
+console.log(...questions.values());
+
 
 // * Sets
 // * ////////////////////
