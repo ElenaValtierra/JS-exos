@@ -166,21 +166,25 @@ const gameEvents = new Map([
   [76, '⚽ GOAL'],
   [80, '⚽ GOAL'],
   [92, '� Yellow card'],
-  ])
+])
 
-  // 1. Create an array 'events' of the different game events that happened (no duplicates)
+// 1. Create an array 'events' of the different game events that happened (no duplicates)
+console.log('----EXO 1---');
 
-  console.log(...gameEvents.values());
 
-   const events = new Set([...gameEvents.values()]);
-  console.log(events);
+console.log(...gameEvents.values());
 
-  // 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+const events = [...new Set([...gameEvents.values()])];
+console.log(events);
 
- console.log(gameEvents.delete(64)); // true
- console.log(gameEvents);
+// 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+console.log('----EXO 2---');
+
+console.log(gameEvents.delete(64)); // true
+console.log(gameEvents);
 
 // 3. Compute and log the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+console.log('----EXO 3---');
 
 const average = 90 / gameEvents.size;
 
@@ -188,9 +192,10 @@ console.log(`An event happened, on average, every ${average} minutes`);
 
 // 4. Loop over 'gameEvents' and log each element to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
 // [FIRST HALF] 17: ⚽ GOAL
+console.log('----EXO 4---');
 
-for (const [key, value] of gameEvents){
-  const stringHalf = key <= 45? `[FIRST HALF]` : `[SECOND HALF]`;
+for (const [key, value] of gameEvents) {
+  const stringHalf = key <= 45 ? `[FIRST HALF]` : `[SECOND HALF]`;
   console.log(`${stringHalf} ${key} ${value}`);
 }
 
