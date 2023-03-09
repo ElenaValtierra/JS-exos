@@ -2,7 +2,7 @@
 
 // Data needed for a later exercise
 const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+    '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 // Data needed for first part of the section
 
@@ -12,45 +12,46 @@ const flights =
 // // * ** Coding Challenge 1 **
 
 const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
+    team1: 'Bayern Munich',
+    team2: 'Borrussia Dortmund',
+    players: [
+        [
+            'Neuer',
+            'Pavard',
+            'Martinez',
+            'Alaba',
+            'Davies',
+            'Kimmich',
+            'Goretzka',
+            'Coman',
+            'Muller',
+            'Gnarby',
+            'Lewandowski',
+        ],
+        [
+            'Burki',
+            'Schulz',
+            'Hummels',
+            'Akanji',
+            'Hakimi',
+            'Weigl',
+            'Witsel',
+            'Hazard',
+            'Brandt',
+            'Sancho',
+            'Gotze',
+        ],
     ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
+    score: '4:0',
+    scored: ['Lewandowski', 'Gnarby', 'Lewandowski',
+        'Hummels'
     ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski',
-    'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
+    date: 'Nov 9th, 2037',
+    odds: {
+        team1: 1.33,
+        x: 3.25,
+        team2: 6.5,
+    },
 };
 
 
@@ -161,7 +162,7 @@ const plane = 'A320';
 console.log(plane[0]);
 console.log(plane[1]);
 console.log(plane[2]);
-console.log('B737'[0]);
+console.log('B737' [0]);
 
 console.log(airline.length);
 console.log('B737'.length);
@@ -171,7 +172,39 @@ console.log(airline.lastIndexOf('r'));
 console.log(airline.indexOf('portugal'));
 
 console.log(airline.slice(4));
-console.log(airline.slice(4, 7));
+console.log(airline.slice(4, 7)); // 7-4 = 3:  length of string -> Air
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+console.log(airline.slice(-4));
+console.log(airline.slice(4, -4));
+
+const checkMiddleSeat = (seat) => {
+        // B and E are middle seats
+        console.log(seat.slice(-1));
+        const s = seat.slice(-1);
+        if (s === 'B' || s === 'E')
+            console.log('You are in the miidle seat ');
+        else console.log('You got lucky ✌️');
+
+    }
+    // checkMiddleSeat('11B');
+    // checkMiddleSeat('23C');
+    // checkMiddleSeat('3E');
+
+const passager = 'elEna';
+const passagerLower = passager.toLowerCase();
+const passagerCorrect = passagerLower[0].toLocaleUpperCase() + passagerLower.slice(1);
+console.log(passagerCorrect);
+
+const email = 'hello@jonas.io';
+const loginEmail = 'Hello@Jonas.Io \n';
+
+const emailLower = loginEmail.toLocaleLowerCase();
+console.log(emailLower);
+// const emailSpace = emailLower.indexOf(0, ' ');
+// console.log(emailSpace);
+
 
 // * CHALLENGE 3
 // * /////////////////////
