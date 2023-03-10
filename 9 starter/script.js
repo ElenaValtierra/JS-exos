@@ -241,6 +241,13 @@ checkBaggage('I have a laptop, some Food and a pocket Knife');
 checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection');
 
+
+console.log('a+very+nice+string'.split('+'));
+const [firstName, lastName] = 'Elena Valtierra'.split(' ');
+
+const newName = ['Ms.', firstName, lastName.toUpperCase()].join('-');
+console.log(newName); //Ms.-Elena-VALTIERRA
+
 // * CHALLENGE 3
 // * /////////////////////
 
