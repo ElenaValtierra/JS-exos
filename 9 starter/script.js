@@ -200,11 +200,46 @@ console.log(passagerCorrect);
 const email = 'hello@jonas.io';
 const loginEmail = 'Hello@Jonas.Io \n';
 
-const emailLower = loginEmail.toLocaleLowerCase();
-console.log(emailLower);
-// const emailSpace = emailLower.indexOf(0, ' ');
-// console.log(emailSpace);
+// const emailLower = loginEmail.toLocaleLowerCase();
+// console.log(emailLower);
+// const emailTrimmed = emailLower.trim();
+// console.log(emailTrimmed);
 
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(email === normalizedEmail);
+
+// Replacing
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+    'All passengers come to boarding door 23. Boarding door 23!';
+
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replaceAll('door', 'gate'));
+// console.log(announcement.replace(/door/g, 'gate'));
+
+//Booleans
+const plane2 = 'Airbus A32neo';
+console.log(plane2.includes('bus'));
+console.log(plane2.includes('s'));
+console.log(plane2.includes('Airu'));
+
+if (plane2.startsWith('Air') && plane2.endsWith('neo')) console.log('The new Airbus!');
+
+// Practice exo
+const checkBaggage = (items) => {
+    const baggage = items.toLowerCase();
+    if (baggage.includes('gun') || baggage.includes('knife')) {
+        console.log('This is not the US');
+    } else console.log('Have a safe trip');
+
+}
+
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
 
 // * CHALLENGE 3
 // * /////////////////////
