@@ -248,6 +248,55 @@ const [firstName, lastName] = 'Elena Valtierra'.split(' ');
 const newName = ['Ms.', firstName, lastName.toUpperCase()].join('-');
 console.log(newName); //Ms.-Elena-VALTIERRA
 
+const capitalizeName = (fullName) =>{
+const namesArray = fullName.split(' ');
+console.log(namesArray); 
+
+const namesUpper = [];
+const namesReplace =[];
+
+for(const n of namesArray){
+  //  First   Method
+  const upperLetter = n[0].toUpperCase();
+  const lowerletters = n.slice(1);
+  namesUpper.push(upperLetter + lowerletters);
+  //  Second Method
+  namesReplace.push(n.replace(n[0], n[0].toUpperCase()) );
+}
+console.log(namesUpper.join(' '));
+console.log(namesReplace.join(' '));
+}
+
+capitalizeName('elena valtierra fouz lopez');
+
+//  Padding
+
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+').padEnd(30, '+'));
+
+const maskCreditCard = (nbCredit) =>{
+  const nbCreditStr = nbCredit + ''; // We make the number a string
+  const last = nbCreditStr.slice(-4);
+  console.log(last);
+  return last.padStart(nbCreditStr.length, '*');
+}
+
+console.log(maskCreditCard(546531343131343))
+
+// Repeat 
+const messageRepeat = 'Bad weather.. All departures delayed! ';
+console.log(messageRepeat.repeat(3));
+
+const planesInLine = (n) =>{
+console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`)
+};
+
+planesInLine(5);
+planesInLine(2);
+
+// mdn string methods in google to see all the methods available !
+
+
 // * CHALLENGE 3
 // * /////////////////////
 
