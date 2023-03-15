@@ -162,7 +162,7 @@ const plane = 'A320';
 console.log(plane[0]);
 console.log(plane[1]);
 console.log(plane[2]);
-console.log('B737' [0]);
+console.log('B737'[0]);
 
 console.log(airline.length);
 console.log('B737'.length);
@@ -180,17 +180,17 @@ console.log(airline.slice(-4));
 console.log(airline.slice(4, -4));
 
 const checkMiddleSeat = (seat) => {
-        // B and E are middle seats
-        console.log(seat.slice(-1));
-        const s = seat.slice(-1);
-        if (s === 'B' || s === 'E')
-            console.log('You are in the miidle seat ');
-        else console.log('You got lucky ✌️');
+    // B and E are middle seats
+    console.log(seat.slice(-1));
+    const s = seat.slice(-1);
+    if (s === 'B' || s === 'E')
+        console.log('You are in the miidle seat ');
+    else console.log('You got lucky ✌️');
 
-    }
-    // checkMiddleSeat('11B');
-    // checkMiddleSeat('23C');
-    // checkMiddleSeat('3E');
+}
+// checkMiddleSeat('11B');
+// checkMiddleSeat('23C');
+// checkMiddleSeat('3E');
 
 const passager = 'elEna';
 const passagerLower = passager.toLowerCase();
@@ -248,23 +248,23 @@ const [firstName, lastName] = 'Elena Valtierra'.split(' ');
 const newName = ['Ms.', firstName, lastName.toUpperCase()].join('-');
 console.log(newName); //Ms.-Elena-VALTIERRA
 
-const capitalizeName = (fullName) =>{
-const namesArray = fullName.split(' ');
-console.log(namesArray); 
+const capitalizeName = (fullName) => {
+    const namesArray = fullName.split(' ');
+    console.log(namesArray);
 
-const namesUpper = [];
-const namesReplace =[];
+    const namesUpper = [];
+    const namesReplace = [];
 
-for(const n of namesArray){
-  //  First   Method
-  const upperLetter = n[0].toUpperCase();
-  const lowerletters = n.slice(1);
-  namesUpper.push(upperLetter + lowerletters);
-  //  Second Method
-  namesReplace.push(n.replace(n[0], n[0].toUpperCase()) );
-}
-console.log(namesUpper.join(' '));
-console.log(namesReplace.join(' '));
+    for (const n of namesArray) {
+        //  First   Method
+        const upperLetter = n[0].toUpperCase();
+        const lowerletters = n.slice(1);
+        namesUpper.push(upperLetter + lowerletters);
+        //  Second Method
+        namesReplace.push(n.replace(n[0], n[0].toUpperCase()));
+    }
+    console.log(namesUpper.join(' '));
+    console.log(namesReplace.join(' '));
 }
 
 capitalizeName('elena valtierra fouz lopez');
@@ -274,11 +274,11 @@ capitalizeName('elena valtierra fouz lopez');
 const message = 'Go to gate 23!';
 console.log(message.padStart(25, '+').padEnd(30, '+'));
 
-const maskCreditCard = (nbCredit) =>{
-  const nbCreditStr = nbCredit + ''; // We make the number a string
-  const last = nbCreditStr.slice(-4);
-  console.log(last);
-  return last.padStart(nbCreditStr.length, '*');
+const maskCreditCard = (nbCredit) => {
+    const nbCreditStr = nbCredit + ''; // We make the number a string
+    const last = nbCreditStr.slice(-4);
+    console.log(last);
+    return last.padStart(nbCreditStr.length, '*');
 }
 
 console.log(maskCreditCard(546531343131343))
@@ -287,16 +287,37 @@ console.log(maskCreditCard(546531343131343))
 const messageRepeat = 'Bad weather.. All departures delayed! ';
 console.log(messageRepeat.repeat(3));
 
-const planesInLine = (n) =>{
-console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`)
+const planesInLine = (n) => {
+    console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`)
 };
 
 planesInLine(5);
 planesInLine(2);
 
-// mdn string methods in google to see all the methods available !
+// * mdn string methods in google to see all the methods available ! for strings
+
+// * CHALLENGE 4
+// * /////////////////////
+
+const camelCaseConverter = (underscore) => {
+    const splitUnderscore = underscore.split('_');
+    console.log(splitUnderscore);
+    const letters = splitUnderscore[1];
+    for (const l of letters) {
+        const upperLetter = l[0].toUpperCase;
+        console.log(upperLetter);
+    }
 
 
+}
+
+camelCaseConverter('underscore_case')
+
+
+
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'))
 // * CHALLENGE 3
 // * /////////////////////
 
