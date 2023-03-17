@@ -298,21 +298,37 @@ planesInLine(2);
 
 // * CHALLENGE 4
 // * /////////////////////
+const textArea = document.getElementsByTagName('textarea');
+const button = document.getElementsByTagName('button');
+
+
+
+
+const camelCase = [];
 
 const camelCaseConverter = (underscore) => {
-    const splitUnderscore = underscore.split('_');
-    console.log(splitUnderscore);
-    const letters = splitUnderscore[1];
-    for (const l of letters) {
-        const upperLetter = l[0].toUpperCase;
-        console.log(upperLetter);
+    const lowerUnderscore = underscore.toLowerCase();
+    const splitUnderscore = lowerUnderscore.split('_'); // puts it in an array
+    console.log(splitUnderscore[1][0]); // select the second element of an array and the first letter
+    const capitalLetter = splitUnderscore[1][0].toUpperCase(); // get first letter of second word and capitalize it
+    console.log(capitalLetter);
+    const sliceUnderscore = splitUnderscore[1].slice(1);
+    console.log(sliceUnderscore);
+    camelCase.push(splitUnderscore[0] + capitalLetter + sliceUnderscore);
+    console.log(camelCase);
+
+    for (let i = 0; i < camelCase.legth; i++) {
+        console.log(`${camelCase} ${'✅'.repeat(i + 1)}`);
     }
-
-
 }
 
-camelCaseConverter('underscore_case')
+// button.addEventListener("click", camelCaseConverter);
 
+camelCaseConverter('underscore_case');
+camelCaseConverter('first_name');
+camelCaseConverter('Some_Variable');
+camelCaseConverter('calculate_AGE');
+camelCaseConverter('delayed_departure');
 
 
 
