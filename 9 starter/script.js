@@ -298,42 +298,39 @@ planesInLine(2);
 
 // * CHALLENGE 4
 // * /////////////////////
-const textArea = document.getElementsByTagName('textarea');
-const button = document.getElementsByTagName('button');
-
-
-
-
-const camelCase = [];
-
-const camelCaseConverter = (underscore) => {
-    const lowerUnderscore = underscore.toLowerCase();
-    const splitUnderscore = lowerUnderscore.split('_'); // puts it in an array
-    console.log(splitUnderscore[1][0]); // select the second element of an array and the first letter
-    const capitalLetter = splitUnderscore[1][0].toUpperCase(); // get first letter of second word and capitalize it
-    console.log(capitalLetter);
-    const sliceUnderscore = splitUnderscore[1].slice(1);
-    console.log(sliceUnderscore);
-    camelCase.push(splitUnderscore[0] + capitalLetter + sliceUnderscore);
-    console.log(camelCase);
-
-    for (let i = 0; i < camelCase.legth; i++) {
-        console.log(`${camelCase} ${'✅'.repeat(i + 1)}`);
-    }
-}
-
-// button.addEventListener("click", camelCaseConverter);
-
-camelCaseConverter('underscore_case');
-camelCaseConverter('first_name');
-camelCaseConverter('Some_Variable');
-camelCaseConverter('calculate_AGE');
-camelCaseConverter('delayed_departure');
-
-
-
 document.body.append(document.createElement('textarea'));
-document.body.append(document.createElement('button'))
+document.body.append(document.createElement('button'));
+
+const button = document.querySelector('button');
+
+button.addEventListener("click", function(){
+    const text = document.querySelector('textarea').value; // we get a paragraph with several words
+    console.log(text); 
+    const rows = text.split('\n'); // we put each word in an array separated by the new line
+    console.log(rows);
+
+     for (const [i, row] of rows.entries()) { // in the for of loop we use .entries() to have access to the indexes, then we destructure it to have access 
+       const [first, second] = row.toLowerCase().trim().split('_');
+     const output = `${first}${second.replace(second[0], second[0].toUpperCase())}`
+    //  console.log(output);
+
+        // console.log(`${camelCase} ${}`);
+        console.log(`${output.padEnd(20)} ${'✅'.repeat(i+1)}`);
+    }
+
+});
+
+
+
+// camelCaseConverter('underscore_case');
+// camelCaseConverter('first_name');
+// camelCaseConverter('Some_Variable');
+// camelCaseConverter('calculate_AGE');
+// camelCaseConverter('delayed_departure');
+
+
+
+
 // * CHALLENGE 3
 // * /////////////////////
 
