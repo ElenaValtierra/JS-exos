@@ -6,7 +6,34 @@ const flights =
 
 // Data needed for first part of the section
 
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
 
+const flightsString = (info) => {
+    const flightrows = info.replaceAll('_', ' ').replaceAll(';', ' ').trim().split('+');
+    console.log(flightrows);
+    for (const [i, values] of flightrows.entries()) {
+        const detailsFlight = values.trim().split(' ');
+        console.log(detailsFlight);
+        for (const [e, detail] of detailsFlight.entries()) {
+            //! const test = detail[e = 2]; 
+            console.log(test);
+            if (i === 0 | 2) {
+                //! console.log(`🔴 ${detail[0]} ${detail[1]} from ${}`);
+            } else {
+
+                console.log(` from to (${3})`);
+            }
+        }
+    }
+    // console.log(``);
+    console.log(flightrows);
+
+}
+
+flightsString(flights);
 
 
 // // * ** Coding Challenge 1 **
@@ -156,145 +183,147 @@ const game = {
 // * /////////////////////
 
 
-const airline = 'TAP Air Portugal';
-const plane = 'A320';
+// const airline = 'TAP Air Portugal';
+// const plane = 'A320';
 
-console.log(plane[0]);
-console.log(plane[1]);
-console.log(plane[2]);
-console.log('B737'[0]);
+// console.log(plane[0]);
+// console.log(plane[1]);
+// console.log(plane[2]);
+// console.log('B737'[0]);
 
-console.log(airline.length);
-console.log('B737'.length);
+// console.log(airline.length);
+// console.log('B737'.length);
 
-console.log(airline.indexOf('r'));
-console.log(airline.lastIndexOf('r'));
-console.log(airline.indexOf('portugal'));
+// console.log(airline.indexOf('r'));
+// console.log(airline.lastIndexOf('r'));
+// console.log(airline.indexOf('portugal'));
 
-console.log(airline.slice(4));
-console.log(airline.slice(4, 7)); // 7-4 = 3:  length of string -> Air
+// console.log(airline.slice(4));
+// console.log(airline.slice(4, 7)); // 7-4 = 3:  length of string -> Air
 
-console.log(airline.slice(0, airline.indexOf(' ')));
-console.log(airline.slice(airline.lastIndexOf(' ') + 1));
-console.log(airline.slice(-4));
-console.log(airline.slice(4, -4));
+// console.log(airline.slice(0, airline.indexOf(' ')));
+// console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+// console.log(airline.slice(-4));
+// console.log(airline.slice(4, -4));
 
-const checkMiddleSeat = (seat) => {
-    // B and E are middle seats
-    console.log(seat.slice(-1));
-    const s = seat.slice(-1);
-    if (s === 'B' || s === 'E')
-        console.log('You are in the miidle seat ');
-    else console.log('You got lucky ✌️');
+// const checkMiddleSeat = (seat) => {
+//     // B and E are middle seats
+//     console.log(seat.slice(-1));
+//     const s = seat.slice(-1);
+//     if (s === 'B' || s === 'E')
+//         console.log('You are in the miidle seat ');
+//     else console.log('You got lucky ✌️');
 
-}
-// checkMiddleSeat('11B');
-// checkMiddleSeat('23C');
-// checkMiddleSeat('3E');
+// }
+// // checkMiddleSeat('11B');
+// // checkMiddleSeat('23C');
+// // checkMiddleSeat('3E');
 
-const passager = 'elEna';
-const passagerLower = passager.toLowerCase();
-const passagerCorrect = passagerLower[0].toLocaleUpperCase() + passagerLower.slice(1);
-console.log(passagerCorrect);
+// const passager = 'elEna';
+// const passagerLower = passager.toLowerCase();
+// const passagerCorrect = passagerLower[0].toLocaleUpperCase() + passagerLower.slice(1);
+// console.log(passagerCorrect);
 
-const email = 'hello@jonas.io';
-const loginEmail = 'Hello@Jonas.Io \n';
+// const email = 'hello@jonas.io';
+// const loginEmail = 'Hello@Jonas.Io \n';
 
-// const emailLower = loginEmail.toLocaleLowerCase();
-// console.log(emailLower);
-// const emailTrimmed = emailLower.trim();
-// console.log(emailTrimmed);
+// // const emailLower = loginEmail.toLocaleLowerCase();
+// // console.log(emailLower);
+// // const emailTrimmed = emailLower.trim();
+// // console.log(emailTrimmed);
 
-const normalizedEmail = loginEmail.toLowerCase().trim();
-console.log(email === normalizedEmail);
+// const normalizedEmail = loginEmail.toLowerCase().trim();
+// console.log(email === normalizedEmail);
 
-// Replacing
-const priceGB = '288,97£';
-const priceUS = priceGB.replace('£', '$').replace(',', '.');
-console.log(priceUS);
+// // Replacing
+// const priceGB = '288,97£';
+// const priceUS = priceGB.replace('£', '$').replace(',', '.');
+// console.log(priceUS);
 
-const announcement =
-    'All passengers come to boarding door 23. Boarding door 23!';
+// const announcement =
+//     'All passengers come to boarding door 23. Boarding door 23!';
 
-console.log(announcement.replace('door', 'gate'));
-console.log(announcement.replaceAll('door', 'gate'));
-// console.log(announcement.replace(/door/g, 'gate'));
+// console.log(announcement.replace('door', 'gate'));
+// console.log(announcement.replaceAll('door', 'gate'));
+// // console.log(announcement.replace(/door/g, 'gate'));
 
-//Booleans
-const plane2 = 'Airbus A32neo';
-console.log(plane2.includes('bus'));
-console.log(plane2.includes('s'));
-console.log(plane2.includes('Airu'));
+// //Booleans
+// const plane2 = 'Airbus A32neo';
+// console.log(plane2.includes('bus'));
+// console.log(plane2.includes('s'));
+// console.log(plane2.includes('Airu'));
 
-if (plane2.startsWith('Air') && plane2.endsWith('neo')) console.log('The new Airbus!');
+// if (plane2.startsWith('Air') && plane2.endsWith('neo')) console.log('The new Airbus!');
 
-// Practice exo
-const checkBaggage = (items) => {
-    const baggage = items.toLowerCase();
-    if (baggage.includes('gun') || baggage.includes('knife')) {
-        console.log('This is not the US');
-    } else console.log('Have a safe trip');
+// // Practice exo
+// const checkBaggage = (items) => {
+//     const baggage = items.toLowerCase();
+//     if (baggage.includes('gun') || baggage.includes('knife')) {
+//         console.log('This is not the US');
+//     } else console.log('Have a safe trip');
 
-}
+// }
 
-checkBaggage('I have a laptop, some Food and a pocket Knife');
-checkBaggage('Socks and camera');
-checkBaggage('Got some snacks and a gun for protection');
+// checkBaggage('I have a laptop, some Food and a pocket Knife');
+// checkBaggage('Socks and camera');
+// checkBaggage('Got some snacks and a gun for protection');
 
 
-console.log('a+very+nice+string'.split('+'));
-const [firstName, lastName] = 'Elena Valtierra'.split(' ');
+// console.log('a+very+nice+string'.split('+'));
+// const [firstName, lastName] = 'Elena Valtierra'.split(' ');
 
-const newName = ['Ms.', firstName, lastName.toUpperCase()].join('-');
-console.log(newName); //Ms.-Elena-VALTIERRA
+// const newName = ['Ms.', firstName, lastName.toUpperCase()].join('-');
+// console.log(newName); //Ms.-Elena-VALTIERRA
 
-const capitalizeName = (fullName) => {
-    const namesArray = fullName.split(' ');
-    console.log(namesArray);
+// const capitalizeName = (fullName) => {
+//     const namesArray = fullName.split(' ');
+//     console.log(namesArray);
 
-    const namesUpper = [];
-    const namesReplace = [];
+//     const namesUpper = [];
+//     const namesReplace = [];
 
-    for (const n of namesArray) {
-        //  First   Method
-        const upperLetter = n[0].toUpperCase();
-        const lowerletters = n.slice(1);
-        namesUpper.push(upperLetter + lowerletters);
-        //  Second Method
-        namesReplace.push(n.replace(n[0], n[0].toUpperCase()));
-    }
-    console.log(namesUpper.join(' '));
-    console.log(namesReplace.join(' '));
-}
+//     for (const n of namesArray) {
+//         //  First   Method
+//         const upperLetter = n[0].toUpperCase();
+//         const lowerletters = n.slice(1);
+//         namesUpper.push(upperLetter + lowerletters);
+//         //  Second Method
+//         namesReplace.push(n.replace(n[0], n[0].toUpperCase()));
+//     }
+//     console.log(namesUpper.join(' '));
+//     console.log(namesReplace.join(' '));
+// }
 
-capitalizeName('elena valtierra fouz lopez');
+// capitalizeName('elena valtierra fouz lopez');
 
-//  Padding
+// //  Padding
 
-const message = 'Go to gate 23!';
-console.log(message.padStart(25, '+').padEnd(30, '+'));
+// const message = 'Go to gate 23!';
+// console.log(message.padStart(25, '+').padEnd(30, '+'));
 
-const maskCreditCard = (nbCredit) => {
-    const nbCreditStr = nbCredit + ''; // We make the number a string
-    const last = nbCreditStr.slice(-4);
-    console.log(last);
-    return last.padStart(nbCreditStr.length, '*');
-}
+// const maskCreditCard = (nbCredit) => {
+//     const nbCreditStr = nbCredit + ''; // We make the number a string
+//     const last = nbCreditStr.slice(-4);
+//     console.log(last);
+//     return last.padStart(nbCreditStr.length, '*');
+// }
 
-console.log(maskCreditCard(546531343131343))
+// console.log(maskCreditCard(546531343131343))
 
-// Repeat 
-const messageRepeat = 'Bad weather.. All departures delayed! ';
-console.log(messageRepeat.repeat(3));
+// // Repeat 
+// const messageRepeat = 'Bad weather.. All departures delayed! ';
+// console.log(messageRepeat.repeat(3));
 
-const planesInLine = (n) => {
-    console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`)
-};
+// const planesInLine = (n) => {
+//     console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`)
+// };
 
-planesInLine(5);
-planesInLine(2);
+// planesInLine(5);
+// planesInLine(2);
 
 // * mdn string methods in google to see all the methods available ! for strings
+
+
 
 // * CHALLENGE 4
 // * /////////////////////
@@ -303,19 +332,19 @@ document.body.append(document.createElement('button'));
 
 const button = document.querySelector('button');
 
-button.addEventListener("click", function(){
+button.addEventListener("click", function () {
     const text = document.querySelector('textarea').value; // we get a paragraph with several words
-    console.log(text); 
+    console.log(text);
     const rows = text.split('\n'); // we put each word in an array separated by the new line
     console.log(rows);
 
-     for (const [i, row] of rows.entries()) { // in the for of loop we use .entries() to have access to the indexes, then we destructure it to have access 
-       const [first, second] = row.toLowerCase().trim().split('_');
-     const output = `${first}${second.replace(second[0], second[0].toUpperCase())}`
-    //  console.log(output);
+    for (const [i, row] of rows.entries()) { // in the for of loop we use .entries() to have access to the indexes, then we destructure it to have access 
+        const [first, second] = row.toLowerCase().trim().split('_');
+        const output = `${first}${second.replace(second[0], second[0].toUpperCase())}`
+        //  console.log(output);
 
         // console.log(`${camelCase} ${}`);
-        console.log(`${output.padEnd(20)} ${'✅'.repeat(i+1)}`);
+        console.log(`${output.padEnd(20)} ${'✅'.repeat(i + 1)}`);
     }
 
 });
@@ -327,6 +356,7 @@ button.addEventListener("click", function(){
 // camelCaseConverter('Some_Variable');
 // camelCaseConverter('calculate_AGE');
 // camelCaseConverter('delayed_departure');
+
 
 
 
