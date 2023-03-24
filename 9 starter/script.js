@@ -11,25 +11,22 @@ const flights =
 //   🔴 Delayed Arrival from HEL to FAO (12h05)
 //            Departure from FAO to LIS (12h30)
 
-const flightsString = (info) => {
-    const flightrows = info.replaceAll('_', ' ').replaceAll(';', ' ').trim().split('+');
-    console.log(flightrows);
-    for (const [i, values] of flightrows.entries()) {
-        const detailsFlight = values.trim().split(' ');
-        console.log(detailsFlight);
-        for (const [e, detail] of detailsFlight.entries()) {
-            //! const test = detail[e = 2]; 
-            console.log(test);
-            if (i === 0 | 2) {
-                //! console.log(`🔴 ${detail[0]} ${detail[1]} from ${}`);
-            } else {
+const getCode = str => str.toUpperCase().slice(0, 3)
 
-                console.log(` from to (${3})`);
-            }
-        }
+const flightsString = (info) => {
+    const flights = info.split('+');
+    for (const flight of flights) {
+        // console.log(flight);
+        const [type, from, to, time] = flight.split(';');
+        // const newType = type.replaceAll('_', ' ').trim();
+        // // console.log(newType);
+        // const newFrom = from.toUpperCase().slice(0, 3);
+        // const newTo = to.toUpperCase().slice(0, 3);
+        // const newTime = time.replace(':', 'h');
+        const output = `${type.startsWith('_Delayed') ? '🔴' : '' }${type.replaceAll('_', ' ')} from ${getCode(from)} to ${getCode(to)} (${time.replace(':', 'h')})`.padStart(50);
+
+        console.log(output);
     }
-    // console.log(``);
-    console.log(flightrows);
 
 }
 
@@ -327,27 +324,27 @@ const game = {
 
 // * CHALLENGE 4
 // * /////////////////////
-document.body.append(document.createElement('textarea'));
-document.body.append(document.createElement('button'));
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
 
-const button = document.querySelector('button');
+// const button = document.querySelector('button');
 
-button.addEventListener("click", function () {
-    const text = document.querySelector('textarea').value; // we get a paragraph with several words
-    console.log(text);
-    const rows = text.split('\n'); // we put each word in an array separated by the new line
-    console.log(rows);
+// button.addEventListener("click", function () {
+//     const text = document.querySelector('textarea').value; // we get a paragraph with several words
+//     console.log(text);
+//     const rows = text.split('\n'); // we put each word in an array separated by the new line
+//     console.log(rows);
 
-    for (const [i, row] of rows.entries()) { // in the for of loop we use .entries() to have access to the indexes, then we destructure it to have access 
-        const [first, second] = row.toLowerCase().trim().split('_');
-        const output = `${first}${second.replace(second[0], second[0].toUpperCase())}`
-        //  console.log(output);
+//     for (const [i, row] of rows.entries()) { // in the for of loop we use .entries() to have access to the indexes, then we destructure it to have access 
+//         const [first, second] = row.toLowerCase().trim().split('_');
+//         const output = `${first}${second.replace(second[0], second[0].toUpperCase())}`
+//         //  console.log(output);
 
-        // console.log(`${camelCase} ${}`);
-        console.log(`${output.padEnd(20)} ${'✅'.repeat(i + 1)}`);
-    }
+//         // console.log(`${camelCase} ${}`);
+//         console.log(`${output.padEnd(20)} ${'✅'.repeat(i + 1)}`);
+//     }
 
-});
+// });
 
 
 
