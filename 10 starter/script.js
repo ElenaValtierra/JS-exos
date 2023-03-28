@@ -22,26 +22,26 @@ createBooking('LG058',undefined, 400); // we skip a parameter when we say it is 
 
 // --------------
 
-const flight = 'LH123';
+// const flight = 'LH123';
 
-const elena = {
-    name: 'Elena Valtierra',
-    passport: 545641516588
-}
-
-const checkIn = (flightNum, passager)=>{
-    flightNum = 'LHGGG'; // we reassign -> creates a COPY
-    passager.name = 'Ms. ' + passager.name; // the object elena will be modified
-// if(passager.passport === 545641516588){
-//     alert('Checked in')
-// }else{
-//     alert('Wrong passport!')
+// const elena = {
+//     name: 'Elena Valtierra',
+//     passport: 545641516588
 // }
-};
 
-checkIn(flight, elena);
-console.log(flight); // not modified
-console.log(elena); // modified
+// const checkIn = (flightNum, passager)=>{
+//     flightNum = 'LHGGG'; // we reassign -> creates a COPY
+//     passager.name = 'Ms. ' + passager.name; // the object elena will be modified
+// // if(passager.passport === 545641516588){
+// //     alert('Checked in')
+// // }else{
+// //     alert('Wrong passport!')
+// // }
+// };
+
+// checkIn(flight, elena);
+// console.log(flight); // not modified
+// console.log(elena); // modified
 
 
 
@@ -59,3 +59,37 @@ console.log(elena); // modified
 
 // * Higher-order functions
 // A function that receives another function as an argument, that returns a new function or both, thanks to the first-class functions
+
+//  ----------------------
+// Callback functions
+
+const oneWord = (str) => {
+    return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = (str) => {
+    const [first, ...others] = str.split(' ');
+    return [first.toUpperCase(), ...others].join(' ');
+}
+
+// Higher-order function
+
+const transformer = (str, fn) => {
+    console.log(`Original string: ${str}`);
+    console.log(`Transforned string: ${fn(str)}`);
+    console.log(`Transforned string BY: ${fn.name}`);
+}
+
+transformer('Javascript is the best!', oneWord);
+// transformer('Javascript is the best!', upperFirstWord);
+
+//  Arrow function callback
+const greet = (greeting) => {
+    return (name) => {
+        console.log(`${greeting} ${name}`);
+    };
+};
+
+const greetertHey = greet('Hey');
+greetertHey('Elena');
+greetertHey('Jonas');
