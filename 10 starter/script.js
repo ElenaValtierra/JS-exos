@@ -63,33 +63,76 @@ createBooking('LG058',undefined, 400); // we skip a parameter when we say it is 
 //  ----------------------
 // Callback functions
 
-const oneWord = (str) => {
-    return str.replace(/ /g, '').toLowerCase();
+// const oneWord = (str) => {
+//     return str.replace(/ /g, '').toLowerCase();
+// };
+
+// const upperFirstWord = (str) => {
+//     const [first, ...others] = str.split(' ');
+//     return [first.toUpperCase(), ...others].join(' ');
+// }
+
+// // Higher-order function
+
+// const transformer = (str, fn) => {
+//     console.log(`Original string: ${str}`);
+//     console.log(`Transforned string: ${fn(str)}`);
+//     console.log(`Transforned string BY: ${fn.name}`);
+// }
+
+// transformer('Javascript is the best!', oneWord);
+// // transformer('Javascript is the best!', upperFirstWord);
+
+// ///////////////////////////////////////
+// // Functions Returning Functions
+// const greet1 = function (greeting) {
+//     return function (name) {
+//       console.log(`${greeting} ${name}`);
+//     };
+//   };
+
+// //  Arrow function callback (same as above)
+// const greet = greeting => name => console.log(`${greeting} ${name}`); // greeting is a function that returns another function that uses console.log
+    
+
+
+// const greetertHey = greet('Hey');
+// greetertHey('Elena');
+// greetertHey('Jonas');
+
+// -----------------
+// The call abd apply methods
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    // book: function(){}, (same as the one written below) 
+    book(flightNum, name){
+        console.log(
+            `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+        );
+        this.bookings.push({flight: `${this.iataCode}${flightNum}`, name})
+    }
 };
 
-const upperFirstWord = (str) => {
-    const [first, ...others] = str.split(' ');
-    return [first.toUpperCase(), ...others].join(' ');
+lufthansa.book(589, 'Elena Valtierra');
+lufthansa.book(666, 'Tony Moncer');
+
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
 }
 
-// Higher-order function
+const book = lufthansa.book; // So that we do not repeat ourselves, we save the function in a variable to reuse the code.
+// book(578 , 'Greg Garcia'); // ? cannot do this as it is a simple function call that will return a undefined as it has a 'this' inside
 
-const transformer = (str, fn) => {
-    console.log(`Original string: ${str}`);
-    console.log(`Transforned string: ${fn(str)}`);
-    console.log(`Transforned string BY: ${fn.name}`);
-}
+book.call(eurowings,232, 'Sarah Smith');
+book.call(lufthansa, 458, 'Pablo Escobar');
 
-transformer('Javascript is the best!', oneWord);
-// transformer('Javascript is the best!', upperFirstWord);
+console.log(lufthansa.bookings);
+console.log(eurowings.bookings);
 
-//  Arrow function callback
-const greet = (greeting) => {
-    return (name) => {
-        console.log(`${greeting} ${name}`);
-    };
-};
-
-const greetertHey = greet('Hey');
-greetertHey('Elena');
-greetertHey('Jonas');
+const flightData = [ 584, 'George Cooper'];
+book.apply(lufthansa, flightData);
+console.log(lufthansa.bookings);
