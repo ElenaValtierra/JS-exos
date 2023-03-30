@@ -136,3 +136,11 @@ console.log(eurowings.bookings);
 const flightData = [ 584, 'George Cooper'];
 book.apply(lufthansa, flightData);
 console.log(lufthansa.bookings);
+
+// -----------------
+// Bind Method
+
+const bookEW = book.bind(eurowings); // it gives a funcion thet you can call and it is already attached to the argument
+const bookLH = book.bind(lufthansa);
+
+bookEW(234, 'Pablo Escobar');
