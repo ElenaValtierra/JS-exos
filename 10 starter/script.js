@@ -93,7 +93,7 @@ createBooking('LG058',undefined, 400); // we skip a parameter when we say it is 
 
 // //  Arrow function callback (same as above)
 // const greet = greeting => name => console.log(`${greeting} ${name}`); // greeting is a function that returns another function that uses console.log
-    
+
 
 
 // const greetertHey = greet('Hey');
@@ -107,11 +107,11 @@ const lufthansa = {
     iataCode: 'LH',
     bookings: [],
     // book: function(){}, (same as the one written below) 
-    book(flightNum, name){
+    book(flightNum, name) {
         console.log(
             `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
         );
-        this.bookings.push({flight: `${this.iataCode}${flightNum}`, name})
+        this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name })
     }
 };
 
@@ -127,13 +127,13 @@ const eurowings = {
 const book = lufthansa.book; // So that we do not repeat ourselves, we save the function in a variable to reuse the code.
 // book(578 , 'Greg Garcia'); // ? cannot do this as it is a simple function call that will return a undefined as it has a 'this' inside
 
-book.call(eurowings,232, 'Sarah Smith');
+book.call(eurowings, 232, 'Sarah Smith');
 book.call(lufthansa, 458, 'Pablo Escobar');
 
 console.log(lufthansa.bookings);
 console.log(eurowings.bookings);
 
-const flightData = [ 584, 'George Cooper'];
+const flightData = [584, 'George Cooper'];
 book.apply(lufthansa, flightData);
 console.log(lufthansa.bookings);
 
@@ -144,3 +144,34 @@ const bookEW = book.bind(eurowings); // it gives a funcion thet you can call and
 const bookLH = book.bind(lufthansa);
 
 bookEW(234, 'Pablo Escobar');
+
+lufthansa.planes = 300;
+console.log(lufthansa);
+lufthansa.buyPlane = function () {
+    console.log(this);
+
+    this.planes++;
+    console.log(this.planes);
+}
+
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+
+
+console.log(addVAT(100));
+
+const addTaxRate = (rate) => {
+    return function (value) {
+        return value + value * rate;
+    };
+};
+
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(100));
+console.log(addVAT2(23));
