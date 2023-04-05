@@ -213,17 +213,12 @@ let text;
 
 const poll = {
     question: 'What is your favorite programming language?',
-    options: ['0: Javascript', '1:Python', '2:Rust', '3: C++'],
+    options: ['0: Javascript', '1: Python', '2: Rust', '3: C++'],
     // This generates [0,0,0,0]. More in the next section
     answers: new Array(4).fill(0),
     registerNewAnswer() {
         let favLanguage = Number(prompt(`${this.question}\n ${this.options.join('\n')}`));
         console.log(typeof favLanguage);
-        for (const option of options.entries()) {
-
-        }
-
-
     }
 };
 
