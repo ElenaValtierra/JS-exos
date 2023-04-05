@@ -209,7 +209,7 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
-let text;
+
 
 const poll = {
     question: 'What is your favorite programming language?',
@@ -217,10 +217,25 @@ const poll = {
     // This generates [0,0,0,0]. More in the next section
     answers: new Array(4).fill(0),
     registerNewAnswer() {
-        let favLanguage = Number(prompt(`${this.question}\n ${this.options.join('\n')}`));
-        console.log(typeof favLanguage);
+        // get answer
+        let answer = Number(prompt(`${this.question}\n ${this.options.join('\n')}`));
+        // Register the answer
+        // If the first 2 are true the execute this.answers[answer]++;
+        typeof answer === 'number' && answer < this.options.length && this.answers[answer]++;
+        console.log(this.answers);
+        this.displayResults;
+
+    },
+    displayResults(type) {
+        if (typeof type === 'array') {
+            console.log(type);
+        } else if (typeof type === 'string') {
+            console.log(`Poll results are ${type}`);
+        }
     }
 };
 
-poll.registerNewAnswer();
-console.log(text);
+// poll.registerNewAnswer();
+
+const pollBtn = document.querySelector('.poll');
+pollBtn.addEventListener('click', poll.registerNewAnswer.bind(poll));
