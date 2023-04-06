@@ -222,20 +222,32 @@ const poll = {
         // Register the answer
         // If the first 2 are true the execute this.answers[answer]++;
         typeof answer === 'number' && answer < this.options.length && this.answers[answer]++;
-        console.log(this.answers);
-        this.displayResults;
-
+        // console.log(this.answers);
+        this.displayResults();
+        this.displayResults('string');
     },
-    displayResults(type) {
-        if (typeof type === 'array') {
-            console.log(type);
-        } else if (typeof type === 'string') {
-            console.log(`Poll results are ${type}`);
+    displayResults(type = 'array') {
+        if (type === 'array') {
+            console.log('Bitch im back');
+            console.log(this.answers);
+        } else if (type === 'string') {
+            console.log(`Poll results are ${this.answers.join(', ')}`);
         }
-    }
+    },
 };
 
 // poll.registerNewAnswer();
 
 const pollBtn = document.querySelector('.poll');
 pollBtn.addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// ! This keyword
+// [5, 2, 3]
+// [1, 5, 3, 9, 6, 1]
+
+// call is used to get a new this keyword
+// the his from the object is this.answers so we need to create a new object:
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
