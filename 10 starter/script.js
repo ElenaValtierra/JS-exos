@@ -100,81 +100,81 @@ createBooking('LG058',undefined, 400); // we skip a parameter when we say it is 
 // greetertHey('Elena');
 // greetertHey('Jonas');
 
-// -----------------
-// The call abd apply methods
-const lufthansa = {
-    airline: 'Lufthansa',
-    iataCode: 'LH',
-    bookings: [],
-    // book: function(){}, (same as the one written below) 
-    book(flightNum, name) {
-        console.log(
-            `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
-        );
-        this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name })
-    }
-};
+// // -----------------
+// // The call abd apply methods
+// const lufthansa = {
+//     airline: 'Lufthansa',
+//     iataCode: 'LH',
+//     bookings: [],
+//     // book: function(){}, (same as the one written below) 
+//     book(flightNum, name) {
+//         console.log(
+//             `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+//         );
+//         this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name })
+//     }
+// };
 
-lufthansa.book(589, 'Elena Valtierra');
-lufthansa.book(666, 'Tony Moncer');
+// lufthansa.book(589, 'Elena Valtierra');
+// lufthansa.book(666, 'Tony Moncer');
 
-const eurowings = {
-    airline: 'Eurowings',
-    iataCode: 'EW',
-    bookings: [],
-}
+// const eurowings = {
+//     airline: 'Eurowings',
+//     iataCode: 'EW',
+//     bookings: [],
+// }
 
-const book = lufthansa.book; // So that we do not repeat ourselves, we save the function in a variable to reuse the code.
-// book(578 , 'Greg Garcia'); // ? cannot do this as it is a simple function call that will return a undefined as it has a 'this' inside
+// const book = lufthansa.book; // So that we do not repeat ourselves, we save the function in a variable to reuse the code.
+// // book(578 , 'Greg Garcia'); // ? cannot do this as it is a simple function call that will return a undefined as it has a 'this' inside
 
-book.call(eurowings, 232, 'Sarah Smith');
-book.call(lufthansa, 458, 'Pablo Escobar');
+// book.call(eurowings, 232, 'Sarah Smith');
+// book.call(lufthansa, 458, 'Pablo Escobar');
 
-console.log(lufthansa.bookings);
-console.log(eurowings.bookings);
+// console.log(lufthansa.bookings);
+// console.log(eurowings.bookings);
 
-const flightData = [584, 'George Cooper'];
-book.apply(lufthansa, flightData);
-console.log(lufthansa.bookings);
+// const flightData = [584, 'George Cooper'];
+// book.apply(lufthansa, flightData);
+// console.log(lufthansa.bookings);
 
-// -----------------
-// Bind Method
+// // -----------------
+// // Bind Method
 
-const bookEW = book.bind(eurowings); // it gives a funcion thet you can call and it is already attached to the argument
-const bookLH = book.bind(lufthansa);
+// const bookEW = book.bind(eurowings); // it gives a funcion thet you can call and it is already attached to the argument
+// const bookLH = book.bind(lufthansa);
 
-bookEW(234, 'Pablo Escobar');
+// bookEW(234, 'Pablo Escobar');
 
-lufthansa.planes = 300;
-console.log(lufthansa);
-lufthansa.buyPlane = function() {
-    console.log(this);
+// lufthansa.planes = 300;
+// console.log(lufthansa);
+// lufthansa.buyPlane = function() {
+//     console.log(this);
 
-    this.planes++;
-    console.log(this.planes);
-}
+//     this.planes++;
+//     console.log(this.planes);
+// }
 
-document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+// document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
-// Partial application
+// // Partial application
 
-const addTax = (rate, value) => value + value * rate;
-console.log(addTax(0.1, 200));
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(0.1, 200));
 
-const addVAT = addTax.bind(null, 0.23);
+// const addVAT = addTax.bind(null, 0.23);
 
 
-console.log(addVAT(100));
+// console.log(addVAT(100));
 
-const addTaxRate = (rate) => {
-    return function(value) {
-        return value + value * rate;
-    };
-};
+// const addTaxRate = (rate) => {
+//     return function(value) {
+//         return value + value * rate;
+//     };
+// };
 
-const addVAT2 = addTaxRate(0.23);
-console.log(addVAT2(100));
-console.log(addVAT2(23));
+// const addVAT2 = addTaxRate(0.23);
+// console.log(addVAT2(100));
+// console.log(addVAT2(23));
 
 // * Challenge 1 Functions!
 
@@ -201,53 +201,81 @@ Here are your tasks:
 
 HINT: Use many of the tools you learned about in this and the last section 😉
 
-BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! So what shoud the this keyword look like in this situation?
 
-BONUS TEST DATA 1: [5, 2, 3]
-BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 
 GOOD LUCK 😀
 */
 
 
 
-const poll = {
-    question: 'What is your favorite programming language?',
-    options: ['0: Javascript', '1: Python', '2: Rust', '3: C++'],
-    // This generates [0,0,0,0]. More in the next section
-    answers: new Array(4).fill(0),
-    registerNewAnswer() {
-        // get answer
-        let answer = Number(prompt(`${this.question}\n ${this.options.join('\n')}`));
-        // Register the answer
-        // If the first 2 are true the execute this.answers[answer]++;
-        typeof answer === 'number' && answer < this.options.length && this.answers[answer]++;
-        // console.log(this.answers);
-        this.displayResults();
-        this.displayResults('string');
-    },
-    displayResults(type = 'array') {
-        if (type === 'array') {
-            console.log('Bitch im back');
-            console.log(this.answers);
-        } else if (type === 'string') {
-            console.log(`Poll results are ${this.answers.join(', ')}`);
-        }
-    },
+// const poll = {
+//     question: 'What is your favorite programming language?',
+//     options: ['0: Javascript', '1: Python', '2: Rust', '3: C++'],
+//     // This generates [0,0,0,0]. More in the next section
+//     answers: new Array(4).fill(0),
+//     registerNewAnswer() {
+//         // get answer
+//         let answer = Number(prompt(`${this.question}\n ${this.options.join('\n')}`));
+//         // Register the answer
+//         // If the first 2 are true the execute this.answers[answer]++;
+//         typeof answer === 'number' && answer < this.options.length && this.answers[answer]++;
+//         // console.log(this.answers);
+//         this.displayResults();
+//         this.displayResults('string');
+//     },
+//     displayResults(type = 'array') {
+//         if (type === 'array') {
+//             console.log('Bitch im back');
+//             console.log(this.answers);
+//         } else if (type === 'string') {
+//             console.log(`Poll results are ${this.answers.join(', ')}`);
+//         }
+//     },
+// };
+
+// // poll.registerNewAnswer();
+
+// const pollBtn = document.querySelector('.poll');
+// pollBtn.addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// /*
+// BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! So what shoud the this keyword look like in this situation?
+
+// BONUS TEST DATA 1: [5, 2, 3]
+// BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
+// */
+// // ! This keyword
+// // [5, 2, 3]
+// // [1, 5, 3, 9, 6, 1]
+
+// // call is used to get a new this keyword
+// // the his from the object is this.answers so we need to create a new object:
+// poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+// poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+// poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+
+// * Immediately Invoked Function Expression (IIFE)
+
+(function() {
+    console.log('This will never run again');
+})();
+
+
+///////////////////////////////////////
+// Closures
+const secureBooking = function() {
+    let passengerCount = 0;
+
+    return function() {
+        passengerCount++;
+        console.log(`${passengerCount} passengers`);
+    };
 };
 
-// poll.registerNewAnswer();
+const booker = secureBooking();
 
-const pollBtn = document.querySelector('.poll');
-pollBtn.addEventListener('click', poll.registerNewAnswer.bind(poll));
+booker();
+booker();
+booker();
 
-// ! This keyword
-// [5, 2, 3]
-// [1, 5, 3, 9, 6, 1]
-
-// call is used to get a new this keyword
-// the his from the object is this.answers so we need to create a new object:
-poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
-
-poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
-poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+console.dir(booker);
