@@ -256,17 +256,17 @@ GOOD LUCK 😀
 
 // * Immediately Invoked Function Expression (IIFE)
 
-(function() {
-    console.log('This will never run again');
-})();
+// (function () {
+//     console.log('This will never run again');
+// })();
 
 
 ///////////////////////////////////////
 // Closures
-const secureBooking = function() {
+const secureBooking = function () {
     let passengerCount = 0;
 
-    return function() {
+    return function () {
         passengerCount++;
         console.log(`${passengerCount} passengers`);
     };
@@ -279,3 +279,63 @@ booker();
 booker();
 
 console.dir(booker);
+
+// Exemple 1 closures
+
+let f;
+
+const g = function () {
+    const a = 23;
+
+    f = function () {
+        console.log(a * 2);
+    }
+}
+
+
+const h = function () {
+    const b = 777;
+    f = function () {
+        console.log(b * 2);
+    };
+}
+
+
+
+g();
+f();
+console.dir(f); // variable environment a:23
+
+
+// Re-assign f function
+h();
+f();
+console.dir(f); // variable environment b:777
+
+// Exemple 2 closures
+
+const boardPassengers = function (n, wait) {
+    const perGroup = n / 3;
+
+    setTimeout(function () {
+        console.log(`We are now boarding all ${n} passagers`);
+        console.log(`There are 3 groups, each with ${perGroup} passengers`);
+    }, wait * 1000);
+
+    console.log(`Will start boarding in ${wait} seconds`);
+};
+
+boardPassengers(180, 3);
+
+
+// Challenge Closures 
+(function () {
+    const header = document.querySelector('h1');
+    header.style.color = 'red';
+    const body = document.querySelector('body');
+
+    body.addEventListener('click', function () {
+        header.style.color = 'blue';
+    })
+
+}());
