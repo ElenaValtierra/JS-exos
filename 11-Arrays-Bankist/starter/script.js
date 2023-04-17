@@ -107,7 +107,7 @@ const currencies = new Map([
 // // We also learned through the spread operator, same results
 // console.log([...arr, ...arr2]);
 
-// // * JOIN 
+// //* JOIN 
 // console.log(letters.join('-'));
 
 // //* The 'at' method
@@ -119,3 +119,21 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // forEach is a higher order function that needs a funtion to tell it what to do.
+
+ for(const [i, movement] of movements.entries()){
+  if(movement > 0){
+    console.log(`Movement: ${i+1} You have deposited ${movement}`);
+  }else{
+    console.log(`Movement: ${i+1} You have withdrawn ${movement}`);
+  }
+ }
+
+ console.log('----forEach------');
+
+ movements.forEach(function(movement, i, array){
+  if(movement > 0){
+    console.log(`Movement: ${i+1} You have deposited ${movement}`);
+  }else{
+    console.log(`Movement: ${i+1} You have withdrawn ${movement}`);
+  }
+ })
