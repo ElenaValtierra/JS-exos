@@ -61,15 +61,26 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// Better to pass the data into the function instead of doing it globally as it is a good practice.
+const displayMovements = function(movements){
+movements.forEach(function(movement, i){
+  const type = mov >0 ? 'deposit': 'withdrawl';
+  // html literals 
+  const html = `
+    <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
+          <div class="movements__value">${mov}</div>
+    </div>
+        `;
+})
+}
+displayMovements(account1);
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -115,25 +126,47 @@ const currencies = new Map([
 // //  best option to get the last value of an array if not you have to get the length and it is longer
 // console.log(arr3.at(-1));
 
-//* Looping Arrays:Foreach
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// //* Looping Arrays:Foreach
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// forEach is a higher order function that needs a funtion to tell it what to do.
+// // forEach is a higher order function that needs a funtion to tell it what to do.
 
- for(const [i, movement] of movements.entries()){
-  if(movement > 0){
-    console.log(`Movement: ${i+1} You have deposited ${movement}`);
-  }else{
-    console.log(`Movement: ${i+1} You have withdrawn ${movement}`);
-  }
- }
+//  for(const [i, movement] of movements.entries()){
+//   if(movement > 0){
+//     console.log(`Movement: ${i+1} You have deposited ${movement}`);
+//   }else{
+//     console.log(`Movement: ${i+1} You have withdrawn ${movement}`);
+//   }
+//  }
 
- console.log('----forEach------');
+//  console.log('----forEach------');
 
- movements.forEach(function(movement, i, array){
-  if(movement > 0){
-    console.log(`Movement: ${i+1} You have deposited ${movement}`);
-  }else{
-    console.log(`Movement: ${i+1} You have withdrawn ${movement}`);
-  }
- })
+//  movements.forEach(function(movement, i, array){
+//   if(movement > 0){
+//     console.log(`Movement: ${i+1} You have deposited ${movement}`);
+//   }else{
+//     console.log(`Movement: ${i+1} You have withdrawn ${movement}`);
+//   }
+//  })
+
+// //* ForEach with maps ans sets
+// // Map
+
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
+
+// currencies.forEach(function(value, key, map){
+// console.log(`${key} : ${value}`);
+// });
+
+// // Set
+// const currenciesUnique =new Set(['EUR','GBP','USD','EUR','EUR']);
+// console.log(currenciesUnique);
+// currenciesUnique.forEach(function(value, _ , map){
+//   console.log(`${value}`);
+// });
+
+//* Bankist App 
