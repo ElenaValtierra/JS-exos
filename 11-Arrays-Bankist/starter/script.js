@@ -61,10 +61,14 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+//* Bankist App 
+
+
 // Better to pass the data into the function instead of doing it globally as it is a good practice.
 const displayMovements = function(movements){
-movements.forEach(function(movement, i){
-  const type = mov >0 ? 'deposit': 'withdrawl';
+  containerMovements.innerHTML = '';
+movements.forEach(function(mov, i){
+  const type = mov >0 ? 'deposit': 'withdrawal';
   // html literals 
   const html = `
     <div class="movements__row">
@@ -72,9 +76,10 @@ movements.forEach(function(movement, i){
           <div class="movements__value">${mov}</div>
     </div>
         `;
+        containerMovements.insertAdjacentHTML('afterbegin', html);
 })
 }
-displayMovements(account1);
+displayMovements(account1.movements);
 
 
 /////////////////////////////////////////////////
@@ -169,4 +174,25 @@ displayMovements(account1);
 //   console.log(`${value}`);
 // });
 
-//* Bankist App 
+//* Challenge
+
+// Test data:
+// § Data 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
+// § Data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
+
+
+const checkDogs = function(dogsJulia, dogsKate){
+// create a shallow copy of dogsJulia
+
+
+  console.log(dogsJulia);
+  dogsJulia.splice(-2);
+  console.log(dogsJulia);
+ dogsJulia.splice(0,1);
+ console.log(dogsJulia);
+
+
+
+}
+
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
