@@ -87,7 +87,7 @@ displayMovements(account1.movements);
 // LECTURES
 
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -106,7 +106,7 @@ displayMovements(account1.movements);
 
 // //* SPLICE - deletes in the original array
 // // console.log(arr.splice(2));
-// console.log(arr.splice(-1)); 
+// console.log(arr.splice(-1));
 // console.log(arr.splice(1, 2)); // eliminates the values in that possition from original array
 
 // console.log(arr);
@@ -123,7 +123,7 @@ displayMovements(account1.movements);
 // // We also learned through the spread operator, same results
 // console.log([...arr, ...arr2]);
 
-// //* JOIN 
+// //* JOIN
 // console.log(letters.join('-'));
 
 // //* The 'at' method
@@ -183,32 +183,54 @@ displayMovements(account1.movements);
 
 // 1. Julia found out that the owners of the first and the last two dogs actually have cats, not dogs! So create a shallow copy of Julia's array, and remove the cat ages from that copied array (because it's a bad practice to mutate function parameters)
 
-const checkDogs = function (dogsJulia, dogsKate) {
-  //1.1 create a shallow copy of dogsJulia
-  const dogsJuliaShallow = [...dogsJulia];
-  //1.2 remove cats
-  // console.log(dogsJuliaShallow);
-  dogsJuliaShallow.splice(-2);
-  // console.log(dogsJuliaShallow);
-  dogsJuliaShallow.splice(0, 1);
-  // console.log(dogsJuliaShallow);
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   //1.1 create a shallow copy of dogsJulia
+//   const dogsJuliaShallow = [...dogsJulia];
+//   //1.2 remove cats
+//   // console.log(dogsJuliaShallow);
+//   dogsJuliaShallow.splice(-2);
+//   // console.log(dogsJuliaShallow);
+//   dogsJuliaShallow.splice(0, 1);
+//   // console.log(dogsJuliaShallow);
 
-  // 2. Create an array with both Julia's (corrected) and Kate's data
+//   // 2. Create an array with both Julia's (corrected) and Kate's data
 
-  const dogs = [...dogsJuliaShallow, ...dogsKate];
-  // console.log(dogs);
+//   const dogs = [...dogsJuliaShallow, ...dogsKate];
+//   // console.log(dogs);
 
-  // 3. For each remaining dog, log to the console whether it's an adult ("Dog number 1 is an adult, and is 5 years old") or a puppy ("Dog number 2 is still a puppy 🤗")
+//   // 3. For each remaining dog, log to the console whether it's an adult ("Dog number 1 is an adult, and is 5 years old") or a puppy ("Dog number 2 is still a puppy 🤗")
 
-  dogs.forEach(function (dog, i, array) {
-    if (dog >= 3) {
-      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
-    } else {
-      console.log(`Dog number ${i + 1} is is still a puppy 🤗`);
-    }
-  })
-}
+//   dogs.forEach(function (dog, i, array) {
+//     if (dog >= 3) {
+//       console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+//     } else {
+//       console.log(`Dog number ${i + 1} is is still a puppy 🤗`);
+//     }
+//   })
+// }
 
-checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
-console.log('-----');
-checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+// checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+// console.log('-----');
+// checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+//* The map method
+
+const eurToUsd = 1.1;
+
+const movementsUSD = movements.map(function (mov, i, array) {
+  return mov * eurToUsd;
+});
+//? Arrow function version
+//const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+
+console.log(movements);
+console.log(movementsUSD);
+
+
+const movementsDescriptions = movements.map((movement, i) => {
+  return `Movement: ${i + 1} You have ${movement > 0 ? 'deposited' : 'withdrew'} ${Math.abs(movement)}`
+});
+
+console.log(movementsDescriptions);
+
