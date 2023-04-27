@@ -6,31 +6,31 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, // %
-  pin: 1111,
+    owner: 'Jonas Schmedtmann',
+    movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+    interestRate: 1.2, // %
+    pin: 1111,
 };
 
 const account2 = {
-  owner: 'Jessica Davis',
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-  interestRate: 1.5,
-  pin: 2222,
+    owner: 'Jessica Davis',
+    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+    interestRate: 1.5,
+    pin: 2222,
 };
 
 const account3 = {
-  owner: 'Steven Thomas Williams',
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7,
-  pin: 3333,
+    owner: 'Steven Thomas Williams',
+    movements: [200, -200, 340, -300, -20, 50, 400, -460],
+    interestRate: 0.7,
+    pin: 3333,
 };
 
 const account4 = {
-  owner: 'Sarah Smith',
-  movements: [430, 1000, 700, 50, 90],
-  interestRate: 1,
-  pin: 4444,
+    owner: 'Sarah Smith',
+    movements: [430, 1000, 700, 50, 90],
+    interestRate: 1,
+    pin: 4444,
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -65,22 +65,28 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 
 // Better to pass the data into the function instead of doing it globally as it is a good practice.
-const displayMovements = function (movements) {
-  containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
-    const type = mov > 0 ? 'deposit' : 'withdrawal';
-    // html literals 
-    const html = `
+const displayMovements = function(movements) {
+    containerMovements.innerHTML = '';
+    movements.forEach(function(mov, i) {
+        const type = mov > 0 ? 'deposit' : 'withdrawal';
+        // html literals 
+        const html = `
     <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
           <div class="movements__value">${mov}</div>
     </div>
         `;
-    containerMovements.insertAdjacentHTML('afterbegin', html);
-  })
+        containerMovements.insertAdjacentHTML('afterbegin', html);
+    })
 }
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function(movements) {
+    const balanceShort = movements.reduce((acc, mov) => acc + mov, 0);
+    console.log(balanceShort);
+    labelBalance.textContent = `${balanceShort}€`;
+};
+calcDisplayBalance(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -215,22 +221,40 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 //* The map method
 
-const eurToUsd = 1.1;
+// const eurToUsd = 1.1;
 
-const movementsUSD = movements.map(function (mov, i, array) {
-  return mov * eurToUsd;
-});
-//? Arrow function version
-//const movementsUSD = movements.map(mov => mov * eurToUsd);
-
-
-console.log(movements);
-console.log(movementsUSD);
+// const movementsUSD = movements.map(function(mov, i, array) {
+//     return mov * eurToUsd;
+// });
+// //? Arrow function version
+// //const movementsUSD = movements.map(mov => mov * eurToUsd);
 
 
-const movementsDescriptions = movements.map((movement, i) => {
-  return `Movement: ${i + 1} You have ${movement > 0 ? 'deposited' : 'withdrew'} ${Math.abs(movement)}`
-});
+// console.log(movements);
+// console.log(movementsUSD);
 
-console.log(movementsDescriptions);
 
+// const movementsDescriptions = movements.map((movement, i) => {
+//     return `Movement: ${i + 1} You have ${movement > 0 ? 'deposited' : 'withdrew'} ${Math.abs(movement)}`
+// });
+
+// console.log(movementsDescriptions);
+
+//*  Reduce Method
+const balance = movements.reduce(function(acc, cur, i, arr) {
+    console.log(`Iteration number ${i} : ${acc}`);
+    return acc + cur;
+}, 0);
+console.log(balance);
+
+const balanceShort = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balanceShort);
+// Max value
+
+const maxValue = movements.reduce(function(acc, mov) {
+    if (acc > mov)
+        return acc;
+    else
+        return mov;
+}, movements[0]);
+console.log(maxValue);
