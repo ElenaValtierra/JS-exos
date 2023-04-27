@@ -262,26 +262,14 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //* Coding challenge 2
 
 const calcAverageHumanAge = function(ages) {
-    const dogAge = ages.map(function(age, i, array) {
-        // if dog is <= 2 years old then humanAge = 2*dogAge
-        if (age <= 2) {
-            const humanAge = 2 * age;
-            return humanAge;
-        }
-        // if dog is > 2 yo then humanAge = 16 + dogAge *4
-        else {
-            const humanAge = 16 + age * 4;
-            return humanAge;
-        }
-    });
-    console.log(dogAge);
-    const olderDogs = dogAge.filter(function(age) {
-        return age >= 18;
-    });
+    const humanAges = ages.map(age => age <= 2 ? 2 * age : 16 + age * 4);
+    console.log(humanAges);
+    const olderDogs = humanAges.filter(age => age >= 18);
     console.log(olderDogs);
-    const calcAvrg = olderDogs.reduce(function(acc, curr, i, array) {
-        return (acc + curr) / olderDogs.length;
+    const calcAvrg = olderDogs.reduce(function(acc, curr) {
+        return acc + curr / olderDogs.length;
     }, 0);
+    const calcAvrgShort = olderDogs.reduce((acc, curr) => (acc + curr), 0) / olderDogs.length;
     console.log(calcAvrg);
 };
 calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
