@@ -241,20 +241,49 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // console.log(movementsDescriptions);
 
 //*  Reduce Method
-const balance = movements.reduce(function(acc, cur, i, arr) {
-    console.log(`Iteration number ${i} : ${acc}`);
-    return acc + cur;
-}, 0);
-console.log(balance);
+// const balance = movements.reduce(function(acc, cur, i, arr) {
+//     console.log(`Iteration number ${i} : ${acc}`);
+//     return acc + cur;
+// }, 0);
+// console.log(balance);
 
-const balanceShort = movements.reduce((acc, cur) => acc + cur, 0);
-console.log(balanceShort);
-// Max value
+// const balanceShort = movements.reduce((acc, cur) => acc + cur, 0);
+// console.log(balanceShort);
+// // Max value
 
-const maxValue = movements.reduce(function(acc, mov) {
-    if (acc > mov)
-        return acc;
-    else
-        return mov;
-}, movements[0]);
-console.log(maxValue);
+// const maxValue = movements.reduce(function(acc, mov) {
+//     if (acc > mov)
+//         return acc;
+//     else
+//         return mov;
+// }, movements[0]);
+// console.log(maxValue);
+
+//* Coding challenge 2
+
+const calcAverageHumanAge = function(ages) {
+    const dogAge = ages.map(function(age, i, array) {
+        // if dog is <= 2 years old then humanAge = 2*dogAge
+        if (age <= 2) {
+            const humanAge = 2 * age;
+            return humanAge;
+        }
+        // if dog is > 2 yo then humanAge = 16 + dogAge *4
+        else {
+            const humanAge = 16 + age * 4;
+            return humanAge;
+        }
+    });
+    console.log(dogAge);
+    const olderDogs = dogAge.filter(function(age) {
+        return age >= 18;
+    });
+    console.log(olderDogs);
+    const calcAvrg = olderDogs.reduce(function(acc, curr, i, array) {
+        return (acc + curr) / olderDogs.length;
+    }, 0);
+    console.log(calcAvrg);
+};
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+console.log('------------');
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
