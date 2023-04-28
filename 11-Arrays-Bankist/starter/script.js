@@ -73,7 +73,7 @@ const displayMovements = function(movements) {
         const html = `
     <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-          <div class="movements__value">${mov}</div>
+          <div class="movements__value">${mov}€</div>
     </div>
         `;
         containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -87,6 +87,27 @@ const calcDisplayBalance = function(movements) {
     labelBalance.textContent = `${balanceShort}€`;
 };
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function(movements) {
+    const incomes = movements
+        .filter(mov => mov > 0)
+        .reduce((acc, mov) => acc + mov, 0)
+    labelSumIn.textContent = `${incomes}€`;
+    const out = movements
+        .filter(mov => mov < 0)
+        .reduce((acc, mov) => acc + mov, 0)
+        // Math.abs to get the absolute value
+    labelSumOut.textContent = `${Math.abs(out)}€`;
+
+    const interest = movements
+        .filter(mov => mov > 0)
+        .map(deposit => deposit * 1.2 / 100)
+        // If the interest generated is at least 1 the it will be added
+        .filter(int => int >= 1)
+        .reduce((acc, int) => acc + int, 0);
+    labelSumInterest.textContent = `${interest}€`
+};
+calcDisplaySummary(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -259,7 +280,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // }, movements[0]);
 // console.log(maxValue);
 
-//* Coding challenge 2
+//* Coding challenge 3
 
 const calcAverageHumanAge = function(ages) {
     const humanAges = ages.map(age => age <= 2 ? 2 * age : 16 + age * 4);
@@ -275,3 +296,16 @@ const calcAverageHumanAge = function(ages) {
 calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 console.log('------------');
 calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+//* Chaining Methods
+const eurToUsd = 1.1;
+console.log(movements);
+
+const totalDepositsUSD = movements
+    .filter(mov => mov > 0)
+    .map((mov, i, array) => {
+        // the array is the result of .filter before it is modified by .map, printed 5 times as there are 5 values
+        // console.log(array);
+        mov * eurToUsd
+    })
+    .reduce((acc, mov) => acc + mov, 0)
