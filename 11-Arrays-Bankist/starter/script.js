@@ -81,10 +81,11 @@ const displayMovements = function(movements) {
 }
 
 
-const calcDisplayBalance = function(movements) {
-    const balanceShort = movements.reduce((acc, mov) => acc + mov, 0);
-    console.log(balanceShort);
-    labelBalance.textContent = `${balanceShort}€`;
+const calcDisplayBalance = function(acc) {
+    // acc.balance is added to the object and the balance is saved inside
+    acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+    labelBalance.textContent = `${acc.balance}€`;
+
 };
 
 
@@ -119,6 +120,15 @@ const createUserNames = function(accs) {
 }
 createUserNames(accounts);
 
+const updateUI = function(acc) {
+    // Display movements
+    displayMovements(acc.movements);
+    // Display balance
+    calcDisplayBalance(acc);
+    // Display summary
+    calcDisplaySummary(acc);
+}
+
 // Event handler 
 let currentAccount; // we declare it here so that we have access outside the function
 btnLogin.addEventListener('click', function(e) {
@@ -141,17 +151,31 @@ btnLogin.addEventListener('click', function(e) {
         // 1.2 Blur focus on pin 
         inputLoginPin.blur();
 
-        //2. Display movements
-        displayMovements(currentAccount.movements);
-        //3. Display balance
-        calcDisplayBalance(currentAccount.movements);
-        //4. Display summary
-        calcDisplaySummary(currentAccount);
-
+        //2. Update UI
+        updateUI(currentAccount);
     }
 });
 
+btnTransfer.addEventListener('click', function(e) {
+    e.preventDefault();
+    const amount = Number(inputTransferAmount.value);
+    const receiveAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+    console.log(amount, receiveAcc);
 
+    // Cleaning the inputs
+    inputTransferAmount.value = inputTransferTo.value = '';
+
+    //! prettier-ignore  "receiveAcc?.username !== currentAccount.username" and (BOTH)  "&& receiveAcc"
+    if (amount > 0 && receiveAcc && currentAccount.balance >= amount && receiveAcc.username !== currentAccount.username) {
+        console.log('transfer valid!');
+        // Doing the transfer
+        currentAccount.movements.push(-amount);
+        receiveAcc.movements.push(amount);
+
+        // Update UI 
+        updateUI(currentAccount);
+    }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
