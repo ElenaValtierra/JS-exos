@@ -177,6 +177,25 @@ btnTransfer.addEventListener('click', function(e) {
     }
 });
 
+btnClose.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Is the current user
+    // Is good username and pin 
+    console.log('delete');
+
+
+    if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
+        // Errase account from accounts - splice will mutate array
+        const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+        console.log(index);
+        // Delete account - Errase the object from the array accounts where the index is the one found in .findIndex
+        accounts.splice(index, 1);
+        // Hide UI 
+        containerApp.style.opacity = 0;
+    }
+    inputCloseUsername.value = inputClosePin.value = '';
+})
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
