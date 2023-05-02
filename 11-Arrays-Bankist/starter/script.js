@@ -138,7 +138,7 @@ btnLogin.addEventListener('click', function(e) {
     console.log(currentAccount);
     // Validate pin for login
     //! prettier-ignore if (currentAccount?.pin === Number(inputLoginPin.value))
-    if (currentAccount.pin === Number(inputLoginPin.value)) {
+    if (currentAccount?.pin === Number(inputLoginPin.value)) {
         console.log('LOGIN');
         //1. Display UI and message
         labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
@@ -166,7 +166,7 @@ btnTransfer.addEventListener('click', function(e) {
     inputTransferAmount.value = inputTransferTo.value = '';
 
     //! prettier-ignore  "receiveAcc?.username !== currentAccount.username" and (BOTH)  "&& receiveAcc"
-    if (amount > 0 && receiveAcc && currentAccount.balance >= amount && receiveAcc.username !== currentAccount.username) {
+    if (amount > 0 && receiveAcc && currentAccount?.balance >= amount && receiveAcc.username !== currentAccount.username) {
         console.log('transfer valid!');
         // Doing the transfer
         currentAccount.movements.push(-amount);
@@ -432,3 +432,26 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+
+//* flat and flatMap
+
+// flat -> 1 level nesting by default
+const arr = [[1,2,3], [4,5,6], 7,8];
+console.log(arr.flat());// [1, 2, 3, 4, 5, 6, 7, 8]
+
+// flat() -> several layers nesting, needs to be specified
+const arrDeep = [[[1,2],3], [[4,5],6], 7,8];
+console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// the bank wants to calculate the sum of all the accounts together.
+
+// CHAINING -flat
+
+const overallBalance = accounts.map(mov => mov.movements).flat().reduce((accum, mov)=> accum + mov,0);
+console.log(overallBalance);
+
+// When combining .map and .flat we use .flatMap, as it is usually used together. -> can only go one level deep! Else you can use .flat
+// CHAINING -flatMap
+
+const overallBalance2 = accounts.flatMap(mov => mov.movements).reduce((accum, mov)=> accum + mov,0);
+console.log(overallBalance2);
