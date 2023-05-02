@@ -177,12 +177,25 @@ btnTransfer.addEventListener('click', function(e) {
     }
 });
 
+// Loan if there is at least 1 deposit with at least 10% of the requested loan amount.
+btnLoan.addEventListener('click', function(e) {
+    e.preventDefault();
+    const amount = Number(inputLoanAmount.value);
+    if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+        // Add the movement
+        currentAccount.movements.push(amount);
+        console.log(currentAccount);
+        //  Update UI
+        updateUI(currentAccount);
+    }
+    inputLoanAmount.value = '';
+})
+
 btnClose.addEventListener('click', function(e) {
     e.preventDefault();
     // Is the current user
     // Is good username and pin 
     console.log('delete');
-
 
     if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
         // Errase account from accounts - splice will mutate array
@@ -401,3 +414,21 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const account = accounts.find(accou => accou.owner === 'Jessica Davis');
 // console.log(account);
+
+//* Some and every 
+console.log(movements);
+// equality
+console.log(movements.includes(-130)); // gives true or false -> true
+
+// Condition - some
+const anyDeposits = movements.some(mov => mov > 1000); // true
+console.log(anyDeposits);
+
+// every
+console.log(movements.every(mov => mov > 0)); // false , not every movement is positive
+
+//  separate callback 
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
