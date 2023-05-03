@@ -65,9 +65,9 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 
 // Better to pass the data into the function instead of doing it globally as it is a good practice.
-const displayMovements = function(movements) {
+const displayMovements = function (movements) {
     containerMovements.innerHTML = '';
-    movements.forEach(function(mov, i) {
+    movements.forEach(function (mov, i) {
         const type = mov > 0 ? 'deposit' : 'withdrawal';
         // html literals 
         const html = `
@@ -81,7 +81,7 @@ const displayMovements = function(movements) {
 }
 
 
-const calcDisplayBalance = function(acc) {
+const calcDisplayBalance = function (acc) {
     // acc.balance is added to the object and the balance is saved inside
     acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
     labelBalance.textContent = `${acc.balance}€`;
@@ -89,7 +89,7 @@ const calcDisplayBalance = function(acc) {
 };
 
 
-const calcDisplaySummary = function(account) {
+const calcDisplaySummary = function (account) {
     const incomes = account.movements
         .filter(mov => mov > 0)
         .reduce((acc, mov) => acc + mov, 0)
@@ -97,7 +97,7 @@ const calcDisplaySummary = function(account) {
     const out = account.movements
         .filter(mov => mov < 0)
         .reduce((acc, mov) => acc + mov, 0)
-        // Math.abs to get the absolute value
+    // Math.abs to get the absolute value
     labelSumOut.textContent = `${Math.abs(out)}€`;
 
     const interest = account.movements
@@ -110,8 +110,8 @@ const calcDisplaySummary = function(account) {
 };
 
 
-const createUserNames = function(accs) {
-    accs.forEach(function(acc) {
+const createUserNames = function (accs) {
+    accs.forEach(function (acc) {
         acc.username = acc.owner.toLowerCase()
             .split(' ')
             .map(name => name[0])
@@ -120,7 +120,7 @@ const createUserNames = function(accs) {
 }
 createUserNames(accounts);
 
-const updateUI = function(acc) {
+const updateUI = function (acc) {
     // Display movements
     displayMovements(acc.movements);
     // Display balance
@@ -131,7 +131,7 @@ const updateUI = function(acc) {
 
 // Event handler 
 let currentAccount; // we declare it here so that we have access outside the function
-btnLogin.addEventListener('click', function(e) {
+btnLogin.addEventListener('click', function (e) {
     // prevent form from sumitting
     e.preventDefault();
     currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
@@ -156,7 +156,7 @@ btnLogin.addEventListener('click', function(e) {
     }
 });
 
-btnTransfer.addEventListener('click', function(e) {
+btnTransfer.addEventListener('click', function (e) {
     e.preventDefault();
     const amount = Number(inputTransferAmount.value);
     const receiveAcc = accounts.find(acc => acc.username === inputTransferTo.value);
@@ -178,7 +178,7 @@ btnTransfer.addEventListener('click', function(e) {
 });
 
 // Loan if there is at least 1 deposit with at least 10% of the requested loan amount.
-btnLoan.addEventListener('click', function(e) {
+btnLoan.addEventListener('click', function (e) {
     e.preventDefault();
     const amount = Number(inputLoanAmount.value);
     if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
@@ -191,7 +191,7 @@ btnLoan.addEventListener('click', function(e) {
     inputLoanAmount.value = '';
 })
 
-btnClose.addEventListener('click', function(e) {
+btnClose.addEventListener('click', function (e) {
     e.preventDefault();
     // Is the current user
     // Is good username and pin 
@@ -436,22 +436,49 @@ console.log(movements.filter(deposit));
 //* flat and flatMap
 
 // flat -> 1 level nesting by default
-const arr = [[1,2,3], [4,5,6], 7,8];
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
 console.log(arr.flat());// [1, 2, 3, 4, 5, 6, 7, 8]
 
 // flat() -> several layers nesting, needs to be specified
-const arrDeep = [[[1,2],3], [[4,5],6], 7,8];
+const arrDeep = [[[1, 2], 3], [[4, 5], 6], 7, 8];
 console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
 
 // the bank wants to calculate the sum of all the accounts together.
 
 // CHAINING -flat
 
-const overallBalance = accounts.map(mov => mov.movements).flat().reduce((accum, mov)=> accum + mov,0);
+const overallBalance = accounts.map(mov => mov.movements).flat().reduce((accum, mov) => accum + mov, 0);
 console.log(overallBalance);
 
 // When combining .map and .flat we use .flatMap, as it is usually used together. -> can only go one level deep! Else you can use .flat
 // CHAINING -flatMap
 
-const overallBalance2 = accounts.flatMap(mov => mov.movements).reduce((accum, mov)=> accum + mov,0);
+const overallBalance2 = accounts.flatMap(mov => mov.movements).reduce((accum, mov) => accum + mov, 0);
 console.log(overallBalance2);
+
+//*Sort
+
+// strings - sort alphabetically
+const names = ['Elena', 'Ana', 'Teresa', 'Bea'];
+console.log(names.sort());
+
+// array of numbers
+// When using an array of numbers it will not return the correct order unless it is explicitly written
+// Decending: return < 0, A, B. If we return something BELOW 0 then A will be before B.
+// Ascending: return > 0, B, A. If we return something above 0 then B will be before A.
+
+// ASCENDING
+movements.sort((a, b) => {
+    if (a > b) return 1;
+    if (a < b) return -1;
+});
+console.log(movements);
+
+// DECENDING 
+movements.sort((a, b) => {
+    if (a > b) return -1;
+    if (a < b) return 1;
+});
+
+// As it mutates the original array we can see what it gives
+console.log(movements);
