@@ -521,6 +521,16 @@ console.log(arr1);
 const y = Array.from({ length: 7 }, () => 1);
 console.log(y);
 
-const z = Array.from({ length: 7 }, (curr, i) => i + 1);
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
 console.log(z);
+
+const hundred = Array.from({ length: 100 }, (_, i) => i + 1);
+console.log(hundred);
+
+//* querySelectorAll
+
+labelBalance.addEventListener('click', function () {
+    const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => el.textContent.replace('€', ''));
+    console.log(movementsUI);
+});
 
