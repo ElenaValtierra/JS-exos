@@ -503,5 +503,24 @@ console.log(movements);
 
 // As it mutates the original array we can see what it gives
 
+//* Fill method 
+const arr1 = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
 
-// reduce sort 
+// Empty arrays + fill method
+const x = new Array(7);
+console.log(x);
+
+x.fill(1, 3, 5);
+x.fill(1);
+console.log(x);
+
+arr1.fill(23, 2, 6);
+console.log(arr1);
+
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (curr, i) => i + 1);
+console.log(z);
+
