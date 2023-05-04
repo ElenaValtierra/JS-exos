@@ -65,9 +65,14 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 
 // Better to pass the data into the function instead of doing it globally as it is a good practice.
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
     containerMovements.innerHTML = '';
-    movements.forEach(function (mov, i) {
+
+    // sort the movements in ascending order, I cannot change it directly as .sort method mutates that is why we slice()
+    // If sort is true it will make a copy and sort in ascending order else it will pass the movements unchanged
+    const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+    movs.forEach(function (mov, i) {
         const type = mov > 0 ? 'deposit' : 'withdrawal';
         // html literals 
         const html = `
@@ -208,6 +213,17 @@ btnClose.addEventListener('click', function (e) {
     }
     inputCloseUsername.value = inputClosePin.value = '';
 })
+
+// Sort
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+    e.preventDefault();
+    // We change sorted to false to true
+    displayMovements(currentAccount.movements, !sorted);
+    // update the variable from false to true
+    sorted = !sorted;
+    console.log(sorted); // Changes from true to false
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -467,18 +483,25 @@ console.log(names.sort());
 // Decending: return < 0, A, B. If we return something BELOW 0 then A will be before B.
 // Ascending: return > 0, B, A. If we return something above 0 then B will be before A.
 
-// ASCENDING
-movements.sort((a, b) => {
-    if (a > b) return 1;
-    if (a < b) return -1;
-});
+//* ASCENDING
+// movements.sort((a, b) => {
+//     if (a > b) return 1;
+//     if (a < b) return -1;
+// });
+// console.log(movements);
+
+movements.sort((a, b) => a - b);
 console.log(movements);
 
-// DECENDING 
-movements.sort((a, b) => {
-    if (a > b) return -1;
-    if (a < b) return 1;
-});
+//* DECENDING 
+// movements.sort((a, b) => {
+//     if (a > b) return -1;
+//     if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
 
 // As it mutates the original array we can see what it gives
-console.log(movements);
+
+
+// reduce sort 
