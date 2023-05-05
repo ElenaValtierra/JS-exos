@@ -553,13 +553,25 @@ const numDeposits2 = accounts
 
 console.log(numDeposits2);
 
-//! 3. Create a new object that contains the sum of the deposits and the withdrawals - Error
+// 3. Create a new object that contains the sum of the deposits and the withdrawals 
 
-const sums = accounts
+const { deposits, withdrawals } = accounts
     .flatMap(acc => acc.movements)
     .reduce((sum, cur) => {
-        cur > 0 ? (sum.deposits += cur) : (sum.withdrawals += cur);
+        // cur > 0 ? (sum.deposits += cur) : (sum.withdrawals += cur);
+        sum[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
         return sum
     }, { deposits: 0, withdrawals: 0 });
 
-console.log(sums);
+console.log(deposits, withdrawals);
+
+// 4. Create a function to convert any string to a title case
+const convertTitleCase = function (title) {
+    const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+    const titleCase = title.toLowerCase().split(' ');
+    return titleCase;
+}
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG nice title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXEMPLE'));
