@@ -541,4 +541,25 @@ const bankDepositSum = accounts.flatMap((acc, i, array) => {
 }).filter(mov => mov > 0).reduce((accum, mov) => accum + mov, 0);
 console.log(bankDepositSum);
 
-//2. How many deposits there have been in the bank with at least 1000 €
+//2. How many deposits there have been in the bank with at least 1000 € 2 options
+const numDeposits1 = accounts.flatMap((acc) => acc.movements).filter(mov => mov >= 1000).length;
+
+console.log(numDeposits1);
+
+const numDeposits2 = accounts
+    .flatMap((acc) => acc.movements)
+    // we put ++count as the count will start at 0 and stay at 0 if we use count++, so we can use it as a prefix and it will change, as it reads from right to left
+    .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+console.log(numDeposits2);
+
+//! 3. Create a new object that contains the sum of the deposits and the withdrawals - Error
+
+const sums = accounts
+    .flatMap(acc => acc.movements)
+    .reduce((sum, cur) => {
+        cur > 0 ? (sum.deposits += cur) : (sum.withdrawals += cur);
+        return sum
+    }, { deposits: 0, withdrawals: 0 });
+
+console.log(sums);
