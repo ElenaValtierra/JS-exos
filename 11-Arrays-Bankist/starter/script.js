@@ -534,3 +534,11 @@ labelBalance.addEventListener('click', function () {
     console.log(movementsUI);
 });
 
+//1. Calculate all the deposits of the bank in total
+const bankDepositSum = accounts.flatMap((acc, i, array) => {
+    // console.log(array);
+    return acc.movements
+}).filter(mov => mov > 0).reduce((accum, mov) => accum + mov, 0);
+console.log(bankDepositSum);
+
+//2. How many deposits there have been in the bank with at least 1000 €
