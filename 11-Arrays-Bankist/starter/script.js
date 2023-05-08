@@ -633,6 +633,54 @@ console.log(dogs);
 Eating an okay amount means the dog's current food portion is within a range 10% above and 10% below the recommended portion (see hint).*/
 // Log to the console weather it's eating too muchor too little
 
-const sarahDog = dogs.find(dog => dog.owners.includes('Sarah')).reduce((acc, dog) => dog.curFood + dog.curFood * 0.10 > dog.recommendedFood ? console.log('Eating too much') : console.log('Eating too little'));
-
+const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
 console.log(sarahDog);
+console.log(`Sarah's dog is eating ${ sarahDog.curFood > sarahDog.recommendedFood ? 'too much' : 'too little'}`);
+
+// Exo 3
+/*3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle').*/
+
+//* My solution 
+// const ownersEatTooMuch = [];
+// const ownersEatTooLittle = [];
+// const foodDogs = dogs.map(dog => dog.curFood > dog.recommendedFood ? ownersEatTooMuch.push(dog.owners) : ownersEatTooLittle.push(dog.owners));
+// console.log(ownersEatTooMuch.flat());
+// console.log(ownersEatTooLittle.flat());
+
+// Exo 4
+/*4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"*/
+const ownersEatTooMuch = dogs.filter(dog => dog.curFood > dog.recommendedFood).flatMap(dog => dog.owners).join(' and ');
+const ownersEatTooLittle = dogs.filter(dog => dog.curFood < dog.recommendedFood).flatMap(dog => dog.owners).join(' and ');
+
+console.log(`${ownersEatTooMuch}'s dogs eat too much!`);
+console.log(`${ownersEatTooLittle}'s dogs eat too little!`);
+
+/*5. Log to the console whether there is any dog eating EXACTLY the amount of food that is recommended (just true or false)*/
+
+const exactFood = dogs.some(dog => dog.curFood === dog.recommendedFood);
+console.log(exactFood);
+
+/*
+6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)*/
+// Eating an okay amount means the dog's current food portion is within a range 10% above and 10% below the recommended portion (see hint).
+//? current > (recommended * 0.90) && current < (recommended * 1.10)
+// ? dog.curFood
+
+// My version - it's okay as well
+// const okayFood = dogs.some(dog => dog.recommendedFood - dog.recommendedFood * 0.10 >= dog.curFood <= dog.recommendedFood + dog.recommendedFood * 0.10);
+
+const checkEatingOkay = dog => dog.curFood > (dog.recommendedFood * 0.90) && dog.curFood < (dog.recommendedFood * 1.10);
+// corrected
+const okayFood = dogs.some(checkEatingOkay);
+
+console.log(okayFood);
+
+/*7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)*/
+
+const arrayOkay = dogs.filter(checkEatingOkay);
+console.log(arrayOkay);
+/*
+8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)*/
+
+const shallowDogs = dogs.slice().sort((a, b) => a.recommendedFood - b.recommendedFood);
+console.log(shallowDogs);
