@@ -575,12 +575,14 @@ console.log(movements);
 
 // console.log(deposits, withdrawals);
 
-// // 4. Create a function to convert any string to a title case
-// const convertTitleCase = function(title) {
+// 4. Create a function to convert any string to a title case
+// const convertTitleCase = function (title) {
+//     const capitalize = str => str[0].toUpperCase() + str.slice(1);
 //     const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
-//     const titleCase = title.toLowerCase().split(' ');
-//     return titleCase;
+//     const titleCase = title.toLowerCase().split(' ').map(word => exceptions.includes(word) ? word : capitalize(word)).join(' ');
+//     return capitalize(titleCase);
 // }
+
 
 // console.log(convertTitleCase('this is a nice title'));
 // console.log(convertTitleCase('this is a LONG nice title but not too long'));
