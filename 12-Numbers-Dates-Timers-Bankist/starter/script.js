@@ -254,50 +254,116 @@ btnSort.addEventListener('click', function (e) {
 
 // Converting and checking numbers
 
-console.log(Number.parseInt('23rem'));
-console.log(Number.parseFloat(23.5));
-console.log(Number.isNaN('20'));
-console.log(Number.isFinite(23/0));
+// console.log(Number.parseInt('23rem'));
+// console.log(Number.parseFloat(23.5));
+// console.log(Number.isNaN('20'));
+// console.log(Number.isFinite(23/0));
 
-// Math and rounding
+// // Math and rounding
 
-console.log(Math.sqrt(25));
-console.log(25** (1/2))
+// console.log(Math.sqrt(25));
+// console.log(25** (1/2))
 
-console.log(Math.max(5,18,23,11,2));
-console.log(Math.min(5,18,23,11,2));
-// area of a circle
+// console.log(Math.max(5,18,23,11,2));
+// console.log(Math.min(5,18,23,11,2));
+// // area of a circle
 
-console.log(Math.PI * Number.parseFloat('10px')**2);
+// console.log(Math.PI * Number.parseFloat('10px')**2);
 
-console.log(Math.trunc(Math.random()*6)+1);
+// console.log(Math.trunc(Math.random()*6)+1);
 
-const randomInt = (min,max)=> Math.trunc(Math.random()* (max-min)+1)+min;
-console.log(randomInt(10,20));
+// const randomInt = (min,max)=> Math.trunc(Math.random()* (max-min)+1)+min;
+// console.log(randomInt(10,20));
 
-console.log(Math.round(23.9));
-console.log(Math.round(23.2));
-console.log(Math.floor(23.9));// round down
-console.log(Math.ceil(23.2)); // round up
+// console.log(Math.round(23.9));
+// console.log(Math.round(23.2));
+// console.log(Math.floor(23.9));// round down
+// console.log(Math.ceil(23.2)); // round up
 
 
-// Rounding integers
-console.log(Math.round(23.3));
-console.log(Math.round(23.9));
+// // Rounding integers
+// console.log(Math.round(23.3));
+// console.log(Math.round(23.9));
 
-console.log(Math.ceil(23.3));
-console.log(Math.ceil(23.9));
+// console.log(Math.ceil(23.3));
+// console.log(Math.ceil(23.9));
 
-console.log(Math.floor(23.3));
-console.log(Math.floor('23.9'));
+// console.log(Math.floor(23.3));
+// console.log(Math.floor('23.9'));
 
-console.log(Math.trunc(23.3));
+// console.log(Math.trunc(23.3));
 
-console.log(Math.trunc(-23.3));
-console.log(Math.floor(-23.3));
+// console.log(Math.trunc(-23.3));
+// console.log(Math.floor(-23.3));
 
-// Rounding decimals
-console.log((2.7).toFixed(0));
-console.log((2.7).toFixed(3));
-console.log((2.345).toFixed(2));
-console.log(+(2.345).toFixed(2));
+// // Rounding decimals
+// console.log((2.7).toFixed(0));
+// console.log((2.7).toFixed(3));
+// console.log((2.345).toFixed(2));
+// console.log(+(2.345).toFixed(2));
+
+//* Reminder
+// console.log(5%2); // 1
+// console.log(5/2); // 2.5 -> 5 = 2 + 2 + 1
+
+// console.log(8%3);
+// console.log(8/3); // 8 = 2 * 3 +2
+
+// const isEven = n => n%2 === 0;
+// console.log(isEven(23));
+// console.log(isEven(8));
+
+// labelBalance.addEventListener('click', function(){
+//   [...document.querySelectorAll('.movements__row')]
+//   .forEach(function(row, i){
+//     if (i%2 === 0) row.style.backgroundColor = 'lightblue'; // every 2nd time its blue
+//     if (i%3 === 0) row.style.backgroundColor = 'lightyellow'; // every third row is yellow
+//     });
+// });
+
+//* Numeric Separators  
+// const diameter = 287_460_000_000;
+// console.log(diameter);
+
+// const price = 345_99;
+// console.log(price);
+
+// const transferFee1 = 15_00;
+// const transferFee2 = 1_500;
+
+// const PI = 3.1415;
+// console.log(PI);
+
+// console.log(Number('230_000'));
+// console.log(parseInt('230_000'));
+
+//* BigInt
+console.log(54852152454212454512455445454475); // 5.485215245421245e+31
+console.log(54852152454212454512455445454475n); // n says it's a bigInt so it will become accurate
+
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+console.log(4838430248342043823408394839483204n);
+console.log(BigInt(48384302));
+
+// Operations
+console.log(10000n + 10000n);
+console.log(36286372637263726376237263726372632n * 10000000n);
+// console.log(Math.sqrt(16n));
+
+const huge = 20289830237283728378237n;
+const num = 23;
+console.log(huge * BigInt(num));
+
+// Exceptions
+console.log(20n > 15);
+console.log(20n === 20);
+console.log(typeof 20n);
+console.log(20n == '20');
+
+console.log(huge + ' is REALLY big!!!');
