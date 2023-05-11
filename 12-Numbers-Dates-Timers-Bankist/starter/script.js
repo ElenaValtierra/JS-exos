@@ -81,19 +81,28 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+  // Create a new date (it has been created by js so we can use new Date)
+  const date = new Date(acc.movementsDates[i]);
+  const day = `${date.getDate()}`.padStart(2,0);
+  const month = `${date.getMonth() +1}`.padStart(2,0);
+  const year = date.getFullYear();
+  // day/month/year
+  const displayDate = `${day}/${month}/${year}`;
 
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+        <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
@@ -142,7 +151,7 @@ createUsernames(accounts);
 
 const updateUI = function (acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 
   // Display balance
   calcDisplayBalance(acc);
@@ -154,6 +163,13 @@ const updateUI = function (acc) {
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
+
+//! FAKE ALWYAS LOG IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
+
+
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -170,6 +186,18 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0] 
     }`;
     containerApp.style.opacity = 100;
+
+    // Create current date
+    const rightNow = new Date();
+    const date = `${rightNow.getDate()}`.padStart(2,0);// the padding will start at possition 2 andt the pad wil be a '0' so if it's 12 it won't work only if its one number like 2
+    const month = `${rightNow.getMonth() +1}`.padStart(2,0);
+    const year = rightNow.getFullYear();
+    const hours = `${rightNow.getHours()}`.padStart(2,0);
+    const minutes = `${rightNow.getMinutes()}`.padStart(2,0);
+
+    // day/month/year
+    const today = `${date}/${month}/${year}, ${hours}:${minutes}`;
+    labelDate.textContent = today;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -198,6 +226,10 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    // Add trsnsfer date 
+    currentAccount.movementsDates.push(new Date().toISOString()); // js will convert it into a formatted string when using .toISOString
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -211,6 +243,9 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
     currentAccount.movements.push(amount);
+
+     // Add trsnsfer date 
+     currentAccount.movementsDates.push(new Date().toISOString()); 
 
     // Update UI
     updateUI(currentAccount);
@@ -244,7 +279,7 @@ btnClose.addEventListener('click', function (e) {
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
@@ -338,32 +373,61 @@ btnSort.addEventListener('click', function (e) {
 // console.log(parseInt('230_000'));
 
 //* BigInt
-console.log(54852152454212454512455445454475); // 5.485215245421245e+31
-console.log(54852152454212454512455445454475n); // n says it's a bigInt so it will become accurate
+// console.log(54852152454212454512455445454475); // 5.485215245421245e+31
+// console.log(54852152454212454512455445454475n); // n says it's a bigInt so it will become accurate
 
-console.log(2 ** 53 - 1);
-console.log(Number.MAX_SAFE_INTEGER);
-console.log(2 ** 53 + 1);
-console.log(2 ** 53 + 2);
-console.log(2 ** 53 + 3);
-console.log(2 ** 53 + 4);
+// console.log(2 ** 53 - 1);
+// console.log(Number.MAX_SAFE_INTEGER);
+// console.log(2 ** 53 + 1);
+// console.log(2 ** 53 + 2);
+// console.log(2 ** 53 + 3);
+// console.log(2 ** 53 + 4);
 
-console.log(4838430248342043823408394839483204n);
-console.log(BigInt(48384302));
+// console.log(4838430248342043823408394839483204n);
+// console.log(BigInt(48384302));
 
-// Operations
-console.log(10000n + 10000n);
-console.log(36286372637263726376237263726372632n * 10000000n);
-// console.log(Math.sqrt(16n));
+// // Operations
+// console.log(10000n + 10000n);
+// console.log(36286372637263726376237263726372632n * 10000000n);
+// // console.log(Math.sqrt(16n));
 
-const huge = 20289830237283728378237n;
-const num = 23;
-console.log(huge * BigInt(num));
+// const huge = 20289830237283728378237n;
+// const num = 23;
+// console.log(huge * BigInt(num));
 
-// Exceptions
-console.log(20n > 15);
-console.log(20n === 20);
-console.log(typeof 20n);
-console.log(20n == '20');
+// // Exceptions
+// console.log(20n > 15);
+// console.log(20n === 20);
+// console.log(typeof 20n);
+// console.log(20n == '20');
 
-console.log(huge + ' is REALLY big!!!');
+// console.log(huge + ' is REALLY big!!!');
+
+//* Working with dates
+
+const now = new Date();
+console.log(now);
+
+const future = new Date(2037,10,19,15,23);
+console.log(future);
+console.log(future.getFullYear());
+
+
+const future2 = new Date(2037, 10, 19, 15, 23);
+console.log(future2);
+console.log(future2.getFullYear());
+console.log(future2.getMonth());
+console.log(future2.getDate());
+console.log(future2.getDay());
+console.log(future2.getHours());
+console.log(future2.getMinutes());
+console.log(future2.getSeconds());
+console.log(future2.toISOString());
+console.log(future2.getTime());
+
+console.log(new Date(2142256980000));
+
+console.log(Date.now());
+
+future2.setFullYear(2040);
+console.log(future2);
