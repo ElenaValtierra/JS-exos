@@ -21,9 +21,9 @@ const account1 = {
     '2020-01-28T09:15:04.904Z',
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2023-05-08T14:43:26.374Z',
+    '2023-05-09T18:49:59.371Z',
+    '2023-05-11T12:01:20.894Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -41,9 +41,9 @@ const account2 = {
     '2019-12-25T06:04:23.907Z',
     '2020-01-25T14:18:46.235Z',
     '2020-02-05T16:33:06.386Z',
-    '2020-04-10T14:43:26.374Z',
-    '2020-06-25T18:49:59.371Z',
-    '2020-07-26T12:01:20.894Z',
+    '2023-05-08T14:43:26.374Z',
+    '2023-05-09T18:49:59.371Z',
+    '2023-05-11T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -81,6 +81,28 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
+const formatMovementDate = function (date) {
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  // Write if the date is today or yesterday
+  const daysPassed = calcDaysPassed(new Date(), date);
+  console.log(daysPassed);
+
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+  else {
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+
+    const year = date.getFullYear();
+    // day/month/year
+    return `${day}/${month}/${year}`;
+  }
+
+}
+
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -89,19 +111,14 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-  // Create a new date (it has been created by js so we can use new Date)
-  const date = new Date(acc.movementsDates[i]);
-  const day = `${date.getDate()}`.padStart(2,0);
-  const month = `${date.getMonth() +1}`.padStart(2,0);
-  const year = date.getFullYear();
-  // day/month/year
-  const displayDate = `${day}/${month}/${year}`;
+    // Create a new date (it has been created by js so we can use new Date)
+    const date = new Date(acc.movementsDates[i]);
+    const displayDate = formatMovementDate(date);
 
     const html = `
       <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
+        <div class="movements__type movements__type--${type}">${i + 1
+      } ${type}</div>
         <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
@@ -169,6 +186,7 @@ currentAccount = account1;
 updateUI(currentAccount);
 containerApp.style.opacity = 100;
 
+// ? Experimenting with the API (Internalization dates)
 
 
 btnLogin.addEventListener('click', function (e) {
@@ -182,22 +200,39 @@ btnLogin.addEventListener('click', function (e) {
 
   if (currentAccount?.pin === +(inputLoginPin.value)) {
     // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${
-      currentAccount.owner.split(' ')[0] 
-    }`;
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]
+      }`;
     containerApp.style.opacity = 100;
 
     // Create current date
-    const rightNow = new Date();
-    const date = `${rightNow.getDate()}`.padStart(2,0);// the padding will start at possition 2 andt the pad wil be a '0' so if it's 12 it won't work only if its one number like 2
-    const month = `${rightNow.getMonth() +1}`.padStart(2,0);
-    const year = rightNow.getFullYear();
-    const hours = `${rightNow.getHours()}`.padStart(2,0);
-    const minutes = `${rightNow.getMinutes()}`.padStart(2,0);
+    const now = new Date();
 
-    // day/month/year
-    const today = `${date}/${month}/${year}, ${hours}:${minutes}`;
-    labelDate.textContent = today;
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric', // also numeric, 2-digit
+      year: 'numeric',
+      // weekday: 'long' //also: short, narrow
+    }
+
+    const locale = navigator.language;
+    console.log(locale);
+
+    // iso language code table to see different countries
+    labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(now);
+
+    /*
+      const date = `${now.getDate()}`.padStart(2, 0);// the padding will start at possition 2 andt the pad wil be a '0' so if it's 12 it won't work only if its one number like 2
+      const month = `${now.getMonth() + 1}`.padStart(2, 0);
+      const year = now.getFullYear();
+      const hours = `${now.getHours()}`.padStart(2, 0);
+      const minutes = `${now.getMinutes()}`.padStart(2, 0);
+  
+      // day/month/year
+      const today = `${date}/${month}/${year}, ${hours}:${minutes}`;
+      labelDate.textContent = today;
+      */
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -244,8 +279,8 @@ btnLoan.addEventListener('click', function (e) {
     // Add movement
     currentAccount.movements.push(amount);
 
-     // Add trsnsfer date 
-     currentAccount.movementsDates.push(new Date().toISOString()); 
+    // Add trsnsfer date 
+    currentAccount.movementsDates.push(new Date().toISOString());
 
     // Update UI
     updateUI(currentAccount);
@@ -356,7 +391,7 @@ btnSort.addEventListener('click', function (e) {
 //     });
 // });
 
-//* Numeric Separators  
+//* Numeric Separators
 // const diameter = 287_460_000_000;
 // console.log(diameter);
 
@@ -405,29 +440,40 @@ btnSort.addEventListener('click', function (e) {
 
 //* Working with dates
 
-const now = new Date();
-console.log(now);
+// const now = new Date();
+// console.log(now);
 
-const future = new Date(2037,10,19,15,23);
-console.log(future);
-console.log(future.getFullYear());
+// const future = new Date(2037, 10, 19, 15, 23);
+// console.log(future);
+// console.log(future.getFullYear());
 
 
-const future2 = new Date(2037, 10, 19, 15, 23);
-console.log(future2);
-console.log(future2.getFullYear());
-console.log(future2.getMonth());
-console.log(future2.getDate());
-console.log(future2.getDay());
-console.log(future2.getHours());
-console.log(future2.getMinutes());
-console.log(future2.getSeconds());
-console.log(future2.toISOString());
-console.log(future2.getTime());
+// const future2 = new Date(2037, 10, 19, 15, 23);
+// console.log(future2);
+// console.log(future2.getFullYear());
+// console.log(future2.getMonth());
+// console.log(future2.getDate());
+// console.log(future2.getDay());
+// console.log(future2.getHours());
+// console.log(future2.getMinutes());
+// console.log(future2.getSeconds());
+// console.log(future2.toISOString());
+// console.log(future2.getTime());
 
-console.log(new Date(2142256980000));
+// console.log(new Date(2142256980000));
 
-console.log(Date.now());
+// console.log(Date.now());
 
-future2.setFullYear(2040);
-console.log(future2);
+// future2.setFullYear(2040);
+// console.log(future2);
+
+///////////////////////////////////////
+// Operations With Dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(+future);
+
+const calcDaysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
+console.log(days1);
