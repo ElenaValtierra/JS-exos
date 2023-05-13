@@ -284,14 +284,16 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    // Add trsnsfer date 
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add trsnsfer date 
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+    }, 2500)
   }
   inputLoanAmount.value = '';
 });
@@ -477,25 +479,36 @@ btnSort.addEventListener('click', function (e) {
 
 ///////////////////////////////////////
 // Operations With Dates
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(+future);
+// const future = new Date(2037, 10, 19, 15, 23);
+// console.log(+future);
 
-const calcDaysPassed = (date1, date2) =>
-  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+// const calcDaysPassed = (date1, date2) =>
+//   Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
 
-const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
-console.log(days1);
+// const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
+// console.log(days1);
 
-//* INTERNATIONALIZING NUMBERS
-const number = 254552145121451.56;
+// //* INTERNATIONALIZING NUMBERS
+// const number = 254552145121451.56;
 
-const options = {
-  style: 'currency', // unit (needs to use unit: mph), percent, currency
-  unit: 'mile-per-hour', // or celsius
-  currency: 'EUR',
-  // useGrouping: false // number without separators
-}
+// const options = {
+//   style: 'currency', // unit (needs to use unit: mph), percent, currency
+//   unit: 'mile-per-hour', // or celsius
+//   currency: 'EUR',
+//   // useGrouping: false // number without separators
+// }
 
-console.log('US: ', new Intl.NumberFormat('en-US', options).format(number));
-console.log('Spain: ', new Intl.NumberFormat('es-ES', options).format(number));
-console.log('Germany: ', new Intl.NumberFormat('de-DE', options).format(number)); 
+// console.log('US: ', new Intl.NumberFormat('en-US', options).format(number));
+// console.log('Spain: ', new Intl.NumberFormat('es-ES', options).format(number));
+// console.log('Germany: ', new Intl.NumberFormat('de-DE', options).format(number)); 
+
+//* setTimeout and setInterval
+
+const ingredients = ['olives', 'spinach', 'tomatos'];
+
+setTimeout((ing1, ing2, ing3) => console.log(`Here is your pizza with ${ing1}, ${ing2} and ${ing3} 🍕`), 3000, ...ingredients);
+
+setInterval(function () {
+  const now = new Date();
+  console.log(now);
+}, 1000);
