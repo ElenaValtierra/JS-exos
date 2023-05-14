@@ -185,14 +185,37 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    // In each second print the remaining time to the UI
+    labelTimer.textContent = `${min}:${sec}`;
+    // when 0 seconds, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+    // Decrease 1s
+    time--;
+  }
+  // Set time to 5 min
+  let time = 120;
+  // Call the timer every second : the first time it is called it will we in another function to call itsef.
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+}
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 //! FAKE ALWYAS LOG IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 // ? Experimenting with the API (Internalization dates)
 
@@ -208,8 +231,7 @@ btnLogin.addEventListener('click', function (e) {
 
   if (currentAccount?.pin === +(inputLoginPin.value)) {
     // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]
-      }`;
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
     containerApp.style.opacity = 100;
 
     // Create current date
@@ -246,6 +268,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    // If I already have a timer running in another account then I log out, otherwise there will be two timers interposing at the same time.
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -275,6 +301,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // Reset a timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -293,6 +323,11 @@ btnLoan.addEventListener('click', function (e) {
 
       // Update UI
       updateUI(currentAccount);
+
+      // Reset a timer
+      clearInterval(timer);
+      timer = startLogOutTimer();
+
     }, 2500)
   }
   inputLoanAmount.value = '';
@@ -500,15 +535,15 @@ btnSort.addEventListener('click', function (e) {
 
 // console.log('US: ', new Intl.NumberFormat('en-US', options).format(number));
 // console.log('Spain: ', new Intl.NumberFormat('es-ES', options).format(number));
-// console.log('Germany: ', new Intl.NumberFormat('de-DE', options).format(number)); 
+// console.log('Germany: ', new Intl.NumberFormat('de-DE', options).format(number));
 
 //* setTimeout and setInterval
 
-const ingredients = ['olives', 'spinach', 'tomatos'];
+// const ingredients = ['olives', 'spinach', 'tomatos'];
 
-setTimeout((ing1, ing2, ing3) => console.log(`Here is your pizza with ${ing1}, ${ing2} and ${ing3} 🍕`), 3000, ...ingredients);
+// setTimeout((ing1, ing2, ing3) => console.log(`Here is your pizza with ${ing1}, ${ing2} and ${ing3} 🍕`), 3000, ...ingredients);
 
-setInterval(function () {
-  const now = new Date();
-  console.log(now);
-}, 1000);
+// setInterval(function () {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
