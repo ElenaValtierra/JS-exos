@@ -31,3 +31,18 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+//  //::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// Selecting elements
+console.log(document.documentElement); // all dom
+console.log(document.head);
+console.log(document.body);
+
+
+// console.log();
+console.log(document.querySelector('.header'));
+console.log(document.querySelectorAll('.section'));
+
+document.getElementById('section--1');
+const allBtns = document.getElementsByTagName('button');
+console.log(allBtns);
