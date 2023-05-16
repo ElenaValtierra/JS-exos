@@ -56,27 +56,28 @@ const allSections = document.querySelectorAll('.section');
 'afterend': Inserts the HTML content immediately after the element.
 */
 //  Exemple
-const element = document.getElementById('myElement');
-const htmlContent = '<p>This is some text.</p>';
+// const element = document.getElementById('myElement');
+// const htmlContent = '<p>This is some text.</p>';
 
-element.insertAdjacentHTML('afterend', htmlContent);
+// element.insertAdjacentHTML('afterend', htmlContent);
 
 
   //? The div has been created but it is not present in the DOM 
 const message = document.createElement('div');
-message.classList.add('cookie-mess');
+message.classList.add('cookie-message');
 
 // message.textContent = 'We use cookies for improved functionality and analytics';
 
-message.innerHTML = 'We use cookies for improved functionality and analytics <button class="btn btn--close-cookie">Got it!</button>';
+message.innerHTML =
+  'We use cookied for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
 
 // ? We add the div after the header so that it will be present in the DOM - first child in header
 
   //?DOM elements are unique and can only exist in 1 place at a time, so it will prepend and then move to the append - Except if we copy it using clineNode(true) - true for the child elements
 
   // CHILD
-header.prepend(message); // child beginning
-// header.append(message); // child end
+// header.prepend(message); // child beginning
+header.append(message); // child end
 // header.append(message.cloneNode(true)); // child end
 
 // SIBLINGS
@@ -88,4 +89,54 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function(
   message.remove();
   // Before they use to do DOM traversing to access the element, as you could not access it directly
   // message.parentElement.removeChild(message);
-})
+});
+
+// -------------------------------
+// * Style, attributes and classes
+
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.color);
+
+// To get a style from an element - getComputedStyle()
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+// ! the height is not taken into account, idk why
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+
+  // ? CUSTOM PROPERTIES - setProperty is the :root in .css to change several things at the same time
+document.documentElement.style.setProperty('--color-primary', 'pink')
+
+
+//* Attributes
+const logo = document.querySelector('.nav__logo');
+//* Classic ones - existe déjà
+console.log(logo.alt);
+console.log(logo.src); // shows the absolute link (same in href), you need a getAttribute to get the relative one, as show below
+console.log(logo.getAttribute('src'));
+console.log(logo.className);
+  // setting them:
+  logo.alt = 'Bautiful minimalist logo';
+
+//* Non-standard - created by me
+console.log(logo.designer); // 'undefined' - Not the way to access it as it is me that created this attribute
+console.log(logo.getAttribute('designer'));// 'Elena' - correct way to get it
+   // setting them:
+   logo.setAttribute('company', 'Bankist');
+
+  //  dataset - to get from the attribute data : data-version-number="3.0", version-number in camelcase
+console.log(logo.dataset.versionNumber);
+
+// * Classes 
+logo.classList.add('c', 'j');
+logo.classList.remove('c');
+logo.classList.toggle('c');
+logo.classList.contains('c');
+
+// Don't use - it overrides all classes at once
+logo.className = 'jonas'
