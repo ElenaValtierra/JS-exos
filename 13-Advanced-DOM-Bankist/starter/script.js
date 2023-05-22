@@ -8,15 +8,15 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
-const openModal = function (e) {
-  e.preventDefault();
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
+const openModal = function(e) {
+    e.preventDefault();
+    modal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
 };
 
-const closeModal = function () {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
+const closeModal = function() {
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
 };
 
 // add event listener to btns
@@ -26,10 +26,10 @@ btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    closeModal();
-  }
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+    }
 });
 
 //  //::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -69,7 +69,7 @@ message.classList.add('cookie-message');
 // message.textContent = 'We use cookies for improved functionality and analytics';
 
 message.innerHTML =
-  'We use cookied for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
+    'We use cookied for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
 
 // ? We add the div after the header so that it will be present in the DOM - first child in header
 
@@ -85,10 +85,10 @@ header.append(message); // child end
 // header.after(message); // sister after element
 
 // Delete Elements
-document.querySelector('.btn--close-cookie').addEventListener('click', function () {
-  message.remove();
-  // Before they use to do DOM traversing to access the element, as you could not access it directly
-  // message.parentElement.removeChild(message);
+document.querySelector('.btn--close-cookie').addEventListener('click', function() {
+    message.remove();
+    // Before they use to do DOM traversing to access the element, as you could not access it directly
+    // message.parentElement.removeChild(message);
 });
 
 // -------------------------------
@@ -106,7 +106,7 @@ console.log(getComputedStyle(message).height);
 
 // ! the height is not taken into account, idk why
 message.style.height =
-  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+    Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
 
 
 // ? CUSTOM PROPERTIES - setProperty is the :root in .css to change several things at the same time
@@ -125,7 +125,7 @@ logo.alt = 'Bautiful minimalist logo';
 
 //* Non-standard - created by me
 console.log(logo.designer); // 'undefined' - Not the way to access it as it is me that created this attribute
-console.log(logo.getAttribute('designer'));// 'Elena' - correct way to get it
+console.log(logo.getAttribute('designer')); // 'Elena' - correct way to get it
 // setting them:
 logo.setAttribute('company', 'Bankist');
 
@@ -148,27 +148,47 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
 // Button scrolling
-btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log('The whole thing:', s1coords);
+btnScrollTo.addEventListener('click', function(e) {
+    const s1coords = section1.getBoundingClientRect();
+    console.log('The whole thing:', s1coords);
 
-  // e.target is the element that was clicked
-  console.log(e.target.getBoundingClientRect());
+    // e.target is the element that was clicked
+    console.log(e.target.getBoundingClientRect());
 
-  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+    console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-  console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
-  // Scrolling
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth'
-  // });
+    console.log(
+        'height/width viewport',
+        document.documentElement.clientHeight,
+        document.documentElement.clientWidth
+    );
+    // Scrolling
+    // window.scrollTo({
+    //   left: s1coords.left + window.pageXOffset,
+    //   top: s1coords.top + window.pageYOffset,
+    //   behavior: 'smooth'
+    // });
 
-  section1.scrollIntoView({ behavior: 'smooth' })
+    section1.scrollIntoView({ behavior: 'smooth' })
 
 });
+
+//* Events and events handlers
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function(e) {
+    alert('You have activated the mouseenter 🐭');
+    // To remove the event once it has been executed we use:
+    // h1.remove('mouseenter', alertH1);
+}
+
+h1.addEventListener('mouseenter', alertH1);
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+//* property onmouseenter
+
+// h1.onmouseenter = function(e) {
+//     alert('You have activated the onmouseenter 🐭');
+// }
