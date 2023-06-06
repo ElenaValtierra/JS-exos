@@ -12,15 +12,15 @@ const section1 = document.querySelector('#section--1');
 ///////////////////////////////////////
 // Modal window
 
-const openModal = function(e) {
-    e.preventDefault();
-    modal.classList.remove('hidden');
-    overlay.classList.remove('hidden');
+const openModal = function (e) {
+  e.preventDefault();
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
 };
 
-const closeModal = function() {
-    modal.classList.add('hidden');
-    overlay.classList.add('hidden');
+const closeModal = function () {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
 };
 
 // add event listener to btns
@@ -30,38 +30,38 @@ btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-        closeModal();
-    }
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal();
+  }
 });
 
 // -------------------
 // *Implementing Smooth Scrolling
 
 // Button scrolling
-btnScrollTo.addEventListener('click', function(e) {
-    const s1coords = section1.getBoundingClientRect();
-    console.log('The whole thing:', s1coords);
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log('The whole thing:', s1coords);
 
-    // e.target is the element that was clicked
-    console.log(e.target.getBoundingClientRect());
+  // e.target is the element that was clicked
+  console.log(e.target.getBoundingClientRect());
 
-    console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-    console.log(
-        'height/width viewport',
-        document.documentElement.clientHeight,
-        document.documentElement.clientWidth
-    );
-    // Scrolling
-    // window.scrollTo({
-    //   left: s1coords.left + window.pageXOffset,
-    //   top: s1coords.top + window.pageYOffset,
-    //   behavior: 'smooth'
-    // });
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+  // Scrolling
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth'
+  // });
 
-    section1.scrollIntoView({ behavior: 'smooth' })
+  section1.scrollIntoView({ behavior: 'smooth' })
 
 });
 
@@ -88,16 +88,16 @@ btnScrollTo.addEventListener('click', function(e) {
 // 1. Add event listener to common parent element (nav__links)
 // 2. Determine what element originates the event 
 
-document.querySelector('.nav__links').addEventListener('click', function(e) {
-    e.preventDefault();
-    console.log(e.target);
-    // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
-    if (e.target.classList.contains('nav__link')) {
-        const id = e.target.getAttribute('href');
-        console.log(id);
-        document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-    }
-});
+// document.querySelector('.nav__links').addEventListener('click', function(e) {
+//     e.preventDefault();
+//     console.log(e.target);
+//     // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
+//     if (e.target.classList.contains('nav__link')) {
+//         const id = e.target.getAttribute('href');
+//         console.log(id);
+//         document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//     }
+// });
 
 
 
@@ -201,7 +201,7 @@ message.classList.add('cookie-message');
 // //  dataset - to get from the attribute data : data-version-number="3.0", version-number in camelcase
 // console.log(logo.dataset.versionNumber);
 
-// // * Classes 
+// // * Classes
 // logo.classList.add('c', 'j');
 // logo.classList.remove('c');
 // logo.classList.toggle('c');
@@ -258,3 +258,36 @@ message.classList.add('cookie-message');
 
 //     // when the parameter is true, the event handler will no longer listen to bubbling events but rather to capturing events
 // }, true);
+
+//  DOM Traversing
+
+const h1 = document.querySelector('h1');
+
+// Going Downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes); // will show everything eventext
+console.log(h1.children); // only get the elements inside h1
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'red';
+
+// Going upwards: selecting parents
+
+console.log('-------Going upwards: selecting parents-------');
+
+console.log(h1.parentNode);
+console.log(h1.parenElement);
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+h1.closest('h1').style.background = 'var(--gradient-secondary)';
+
+console.log('-------Going sideways: siblings-------');
+
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach((el) => {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});
