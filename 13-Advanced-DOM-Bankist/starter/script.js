@@ -66,6 +66,8 @@ btnScrollTo.addEventListener('click', function (e) {
 });
 
 
+
+
 //  //
 //  * Page navigation - /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,18 +90,32 @@ btnScrollTo.addEventListener('click', function (e) {
 // 1. Add event listener to common parent element (nav__links)
 // 2. Determine what element originates the event 
 
-// document.querySelector('.nav__links').addEventListener('click', function(e) {
-//     e.preventDefault();
-//     console.log(e.target);
-//     // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
-//     if (e.target.classList.contains('nav__link')) {
-//         const id = e.target.getAttribute('href');
-//         console.log(id);
-//         document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-//     }
-// });
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log(e.target);
+  // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
 
+// * Tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
 
+tabsContainer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+  // Guard Clause - if condition that will be returned eary if some contition is matched. Below, when there is nothing clicke me return the function, not falsey is true so it stops here
+  if (!clicked) return;
+
+  clicked.classList.add('operations__tab--active');
+
+})
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
@@ -261,33 +277,33 @@ message.classList.add('cookie-message');
 
 //  DOM Traversing
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-// Going Downwards: child
-console.log(h1.querySelectorAll('.highlight'));
-console.log(h1.childNodes); // will show everything eventext
-console.log(h1.children); // only get the elements inside h1
-h1.firstElementChild.style.color = 'white';
-h1.lastElementChild.style.color = 'red';
+// // Going Downwards: child
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes); // will show everything eventext
+// console.log(h1.children); // only get the elements inside h1
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'red';
 
-// Going upwards: selecting parents
+// // Going upwards: selecting parents
 
-console.log('-------Going upwards: selecting parents-------');
+// console.log('-------Going upwards: selecting parents-------');
 
-console.log(h1.parentNode);
-console.log(h1.parenElement);
+// console.log(h1.parentNode);
+// console.log(h1.parenElement);
 
-h1.closest('.header').style.background = 'var(--gradient-secondary)';
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
-h1.closest('h1').style.background = 'var(--gradient-secondary)';
+// h1.closest('h1').style.background = 'var(--gradient-secondary)';
 
-console.log('-------Going sideways: siblings-------');
+// console.log('-------Going sideways: siblings-------');
 
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
 
-console.log(h1.parentElement.children);
+// console.log(h1.parentElement.children);
 
-[...h1.parentElement.children].forEach((el) => {
-  if (el !== h1) el.style.transform = 'scale(0.5)';
-});
+// [...h1.parentElement.children].forEach((el) => {
+//   if (el !== h1) el.style.transform = 'scale(0.5)';
+// });
