@@ -110,12 +110,22 @@ tabsContainer.addEventListener('click', function (e) {
   e.preventDefault();
   const clicked = e.target.closest('.operations__tab');
   console.log(clicked);
-  // Guard Clause - if condition that will be returned eary if some contition is matched. Below, when there is nothing clicke me return the function, not falsey is true so it stops here
+
+  // Guard Clause - if statement that will be returned eary if some contition is matched. Below, when there is nothing clicke me return the function, as it is null, it is falsey value, so not falsey returns true so it stops here as it returns.
   if (!clicked) return;
 
+  // Remove active classes
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // Activate tab
   clicked.classList.add('operations__tab--active');
 
-})
+  // Activate content area
+  console.log(clicked.dataset.tab);
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+
+});
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
