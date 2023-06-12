@@ -20,15 +20,15 @@ const nav = document.querySelector('.nav');
 ///////////////////////////////////////
 // Modal window
 
-const openModal = function (e) {
-  e.preventDefault();
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
+const openModal = function(e) {
+    e.preventDefault();
+    modal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
 };
 
-const closeModal = function () {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
+const closeModal = function() {
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
 };
 
 // add event listener to btns
@@ -38,38 +38,38 @@ btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    closeModal();
-  }
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+    }
 });
 
 // -------------------
 // *Implementing Smooth Scrolling
 
 // Button scrolling
-btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log('The whole thing:', s1coords);
+btnScrollTo.addEventListener('click', function(e) {
+    const s1coords = section1.getBoundingClientRect();
+    console.log('The whole thing:', s1coords);
 
-  // e.target is the element that was clicked
-  console.log(e.target.getBoundingClientRect());
+    // e.target is the element that was clicked
+    console.log(e.target.getBoundingClientRect());
 
-  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+    console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-  console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
-  // Scrolling
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth'
-  // });
+    console.log(
+        'height/width viewport',
+        document.documentElement.clientHeight,
+        document.documentElement.clientWidth
+    );
+    // Scrolling
+    // window.scrollTo({
+    //   left: s1coords.left + window.pageXOffset,
+    //   top: s1coords.top + window.pageYOffset,
+    //   behavior: 'smooth'
+    // });
 
-  section1.scrollIntoView({ behavior: 'smooth' })
+    section1.scrollIntoView({ behavior: 'smooth' })
 
 });
 
@@ -98,53 +98,67 @@ btnScrollTo.addEventListener('click', function (e) {
 // 1. Add event listener to common parent element (nav__links)
 // 2. Determine what element originates the event 
 
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  e.preventDefault();
-  console.log(e.target);
-  // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
-  if (e.target.classList.contains('nav__link')) {
-    const id = e.target.getAttribute('href');
-    console.log(id);
-    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-  }
+document.querySelector('.nav__links').addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log(e.target);
+    // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
+    if (e.target.classList.contains('nav__link')) {
+        const id = e.target.getAttribute('href');
+        console.log(id);
+        document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+    }
 });
 
 // * Tabbed component
-tabsContainer.addEventListener('click', function (e) {
-  e.preventDefault();
-  const clicked = e.target.closest('.operations__tab');
-  console.log(clicked);
+tabsContainer.addEventListener('click', function(e) {
+    e.preventDefault();
+    const clicked = e.target.closest('.operations__tab');
+    console.log(clicked);
 
-  // Guard Clause - if statement that will be returned eary if some contition is matched. Below, when there is nothing clicke me return the function, as it is null, it is falsey value, so not falsey returns true so it stops here as it returns.
-  if (!clicked) return;
+    // Guard Clause - if statement that will be returned eary if some contition is matched. Below, when there is nothing clicke me return the function, as it is null, it is falsey value, so not falsey returns true so it stops here as it returns.
+    if (!clicked) return;
 
-  // Remove active classes
-  tabs.forEach(t => t.classList.remove('operations__tab--active'));
-  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+    // Remove active classes
+    tabs.forEach(t => t.classList.remove('operations__tab--active'));
+    tabsContent.forEach(c => c.classList.remove('operations__content--active'));
 
-  // Activate tab
-  clicked.classList.add('operations__tab--active');
+    // Activate tab
+    clicked.classList.add('operations__tab--active');
 
-  // Activate content area
-  console.log(clicked.dataset.tab);
-  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+    // Activate content area
+    console.log(clicked.dataset.tab);
+    document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 
 });
 
 // Menu Fade animation
-nav.addEventListener('mouseover', function (e) {
-  if (e.target.classList.contains('.nav__link')) {
-    const link = e.target;
-    console.log(link);
-    // selecting siblig elements - By going to parent and then selecting the children.
-    const siblings = link.closest('.nav').querySelector('.nav__Link');
-    const logo = link.closest('.nav').querySelector('img');
+nav.addEventListener('mouseover', function(e) {
+    if (e.target.classList.contains('nav__link')) {
+        const link = e.target;
+        // selecting siblig elements - By going to parent and then selecting the children.
+        const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+        const logo = link.closest('.nav').querySelector('img');
 
+        siblings.forEach(el => {
+            if (el !== link) el.style.opacity = 0.5;
+        });
 
-  }
+        logo.style.opacity = 0.5;
+    }
 });
-nav.addEventListener('mouseout', function (e) {
+nav.addEventListener('mouseout', function(e) {
+    if (e.target.classList.contains('nav__link')) {
+        const link = e.target;
+        // selecting siblig elements - By going to parent and then selecting the children.
+        const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+        const logo = link.closest('.nav').querySelector('img');
 
+        siblings.forEach(el => {
+            if (el !== link) el.style.opacity = 1;
+        });
+
+        logo.style.opacity = 1;
+    }
 });
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
