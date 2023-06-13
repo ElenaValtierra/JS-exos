@@ -132,7 +132,8 @@ tabsContainer.addEventListener('click', function(e) {
 });
 
 // Menu Fade animation
-nav.addEventListener('mouseover', function(e) {
+const handleHover = function(e, opacity) {
+    console.log(this, e.currentTarget);
     if (e.target.classList.contains('nav__link')) {
         const link = e.target;
         // selecting siblig elements - By going to parent and then selecting the children.
@@ -140,26 +141,20 @@ nav.addEventListener('mouseover', function(e) {
         const logo = link.closest('.nav').querySelector('img');
 
         siblings.forEach(el => {
-            if (el !== link) el.style.opacity = 0.5;
+            if (el !== link) el.style.opacity = this;
         });
 
-        logo.style.opacity = 0.5;
+        logo.style.opacity = this;
     }
-});
-nav.addEventListener('mouseout', function(e) {
-    if (e.target.classList.contains('nav__link')) {
-        const link = e.target;
-        // selecting siblig elements - By going to parent and then selecting the children.
-        const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-        const logo = link.closest('.nav').querySelector('img');
+}
 
-        siblings.forEach(el => {
-            if (el !== link) el.style.opacity = 1;
-        });
+//  As thhe event listener is expecting a function we cannot simply write it intead of the function nav.addEventListener('mouseover', handleHover(e, 0.5)); so we:
 
-        logo.style.opacity = 1;
-    }
-});
+// Passing "argument" into handler 
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+// Or we can use bind() method as it returns a function, thje 'this variable will be set to the value 1 or 0.5
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
