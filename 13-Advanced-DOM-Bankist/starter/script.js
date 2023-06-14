@@ -133,7 +133,7 @@ tabsContainer.addEventListener('click', function(e) {
 
 // Menu Fade animation
 const handleHover = function(e, opacity) {
-    console.log(this, e.currentTarget);
+    // console.log(this, e.currentTarget);
     if (e.target.classList.contains('nav__link')) {
         const link = e.target;
         // selecting siblig elements - By going to parent and then selecting the children.
@@ -155,6 +155,23 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
 // Or we can use bind() method as it returns a function, thje 'this variable will be set to the value 1 or 0.5
+
+// * Sticy scroll bar - Intersection observer API
+
+// callback function will be called every time the element targeted (section1) is intersecting the root element at the thrshold (that is 10% -> 0.1) we defined
+const obsCallback = function(entries, observer) {
+    entries.forEach(entry => {
+        console.log(entry);
+    })
+};
+
+const obsOptions = {
+    root: null,
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
