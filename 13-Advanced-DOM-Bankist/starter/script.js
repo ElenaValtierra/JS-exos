@@ -20,13 +20,13 @@ const nav = document.querySelector('.nav');
 ///////////////////////////////////////
 // Modal window
 
-const openModal = function(e) {
+const openModal = function (e) {
     e.preventDefault();
     modal.classList.remove('hidden');
     overlay.classList.remove('hidden');
 };
 
-const closeModal = function() {
+const closeModal = function () {
     modal.classList.add('hidden');
     overlay.classList.add('hidden');
 };
@@ -38,7 +38,7 @@ btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
         closeModal();
     }
@@ -48,7 +48,7 @@ document.addEventListener('keydown', function(e) {
 // *Implementing Smooth Scrolling
 
 // Button scrolling
-btnScrollTo.addEventListener('click', function(e) {
+btnScrollTo.addEventListener('click', function (e) {
     const s1coords = section1.getBoundingClientRect();
     console.log('The whole thing:', s1coords);
 
@@ -98,7 +98,7 @@ btnScrollTo.addEventListener('click', function(e) {
 // 1. Add event listener to common parent element (nav__links)
 // 2. Determine what element originates the event 
 
-document.querySelector('.nav__links').addEventListener('click', function(e) {
+document.querySelector('.nav__links').addEventListener('click', function (e) {
     e.preventDefault();
     console.log(e.target);
     // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
@@ -110,7 +110,7 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
 });
 
 // * Tabbed component
-tabsContainer.addEventListener('click', function(e) {
+tabsContainer.addEventListener('click', function (e) {
     e.preventDefault();
     const clicked = e.target.closest('.operations__tab');
     console.log(clicked);
@@ -132,7 +132,7 @@ tabsContainer.addEventListener('click', function(e) {
 });
 
 // Menu Fade animation
-const handleHover = function(e, opacity) {
+const handleHover = function (e, opacity) {
     // console.log(this, e.currentTarget);
     if (e.target.classList.contains('nav__link')) {
         const link = e.target;
@@ -159,7 +159,7 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // * Sticy scroll bar - Intersection observer API
 
 // callback function will be called every time the element targeted (section1) is intersecting the root element at the thrshold (that is 10% -> 0.1) we defined
-const obsCallback = function(entries, observer) {
+const obsCallback = function (entries, observer) {
     entries.forEach(entry => {
         console.log(entry);
     })
@@ -167,7 +167,7 @@ const obsCallback = function(entries, observer) {
 
 const obsOptions = {
     root: null,
-    threshold: 0.1
+    threshold: [0, 0.2]
 };
 
 const observer = new IntersectionObserver(obsCallback, obsOptions);
