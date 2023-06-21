@@ -185,8 +185,6 @@ const stickyNav = function(entries) {
     else nav.classList.remove('sticky');
 }
 
-
-
 const headerObserver = new IntersectionObserver(stickyNav, {
     root: null,
     threshold: 0,
@@ -194,6 +192,20 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 
 headerObserver.observe(header);
+
+//* Reveal Section
+
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function(entries, observer) {
+
+}
+
+
+const sectionObserver = new IntersectionObserver(revealSection, {});
+allSections.forEach(function(section) {
+    sectionObserver.observe(section);
+})
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
