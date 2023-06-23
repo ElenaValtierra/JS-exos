@@ -226,6 +226,8 @@ allSections.forEach(function(section) {
     section.classList.add('section--hidden');
 });
 
+//* Lazy loading imageResolution - good for performance 
+
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
 // console.log(document.documentElement); // all dom
