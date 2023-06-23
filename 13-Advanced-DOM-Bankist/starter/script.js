@@ -20,13 +20,13 @@ const nav = document.querySelector('.nav');
 ///////////////////////////////////////
 // Modal window
 
-const openModal = function (e) {
+const openModal = function(e) {
     e.preventDefault();
     modal.classList.remove('hidden');
     overlay.classList.remove('hidden');
 };
 
-const closeModal = function () {
+const closeModal = function() {
     modal.classList.add('hidden');
     overlay.classList.add('hidden');
 };
@@ -38,7 +38,7 @@ btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
-document.addEventListener('keydown', function (e) {
+document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
         closeModal();
     }
@@ -48,7 +48,7 @@ document.addEventListener('keydown', function (e) {
 // *Implementing Smooth Scrolling
 
 // Button scrolling
-btnScrollTo.addEventListener('click', function (e) {
+btnScrollTo.addEventListener('click', function(e) {
     const s1coords = section1.getBoundingClientRect();
     console.log('The whole thing:', s1coords);
 
@@ -98,7 +98,7 @@ btnScrollTo.addEventListener('click', function (e) {
 // 1. Add event listener to common parent element (nav__links)
 // 2. Determine what element originates the event 
 
-document.querySelector('.nav__links').addEventListener('click', function (e) {
+document.querySelector('.nav__links').addEventListener('click', function(e) {
     e.preventDefault();
     console.log(e.target);
     // Matching strategy - as if we click in nav__link it also does a log for it BUT we only want nav__links
@@ -110,7 +110,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 // * Tabbed component
-tabsContainer.addEventListener('click', function (e) {
+tabsContainer.addEventListener('click', function(e) {
     e.preventDefault();
     const clicked = e.target.closest('.operations__tab');
     console.log(clicked);
@@ -132,7 +132,7 @@ tabsContainer.addEventListener('click', function (e) {
 });
 
 // Menu Fade animation
-const handleHover = function (e, opacity) {
+const handleHover = function(e, opacity) {
     // console.log(this, e.currentTarget);
     if (e.target.classList.contains('nav__link')) {
         const link = e.target;
@@ -177,9 +177,9 @@ const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 // console.log(navHeight);
 
-const stickyNav = function (entries) {
+const stickyNav = function(entries) {
     const [entry] = entries; // same as const [entry] = entries[0]; -> destructuring to get first element
-    console.log(entry);
+    // console.log(entry);
 
     if (!entry.isIntersecting) nav.classList.add('sticky');
     else nav.classList.remove('sticky');
@@ -197,31 +197,34 @@ headerObserver.observe(header);
 
 const allSections = document.querySelectorAll('.section');
 
-//! to get the rootMargin  parameter dynamically
-const sectionHeight = allSections.forEach((section, index, array) => {
-    const secH = section.getBoundingClientRect().height;
-    // console.log(index, secH);
-    console.log(array);
-})
-
-
-const revealSection = function (entries, observer) {
+// 1.1 Function of Intersection observer - Use destructuring to select first element
+const revealSection = function(entries, observer) {
     const [entry] = entries;
     console.log(entry);
+
+    //3. remove the class so it becomes visible - remove it from target (see options in console)
+    // ? Guard clause - if entry.isIntersecting is false return otherwise remove class
+    if (!entry.isIntersecting) return;
+
+    entry.target.classList.remove('section--hidden');
+    // 4. We unobserve so that we do not have so many logs
+    observer.unobserve(entry.target);
+
 };
 
-// !
+// 1. Creation of Intersection Observer
 const sectionObserver = new IntersectionObserver(revealSection, {
     root: null, //It is the viewport so it's null
     thershold: 0.15,
-    // rootMargin: `-${sectionHeight}px`
 });
 
-allSections.forEach(function (section) {
+// 2. Observe sections using 1 and add class 'section--hidden'
+// check it has worked by opening the 'target' in the console and looking for classList 3
+allSections.forEach(function(section) {
     sectionObserver.observe(section);
     //? We need to add the class here and not directly on the HTML doc as some browsers deactivate it.
     section.classList.add('section--hidden');
-})
+});
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
