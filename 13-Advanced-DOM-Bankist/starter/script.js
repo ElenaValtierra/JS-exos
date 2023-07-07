@@ -236,14 +236,30 @@ const imgTargets = document.querySelectorAll('img[data-src]');
 // 4. create the callback function from the imgObserver
 const loadImg = function (entries, observer) {
     // only one theshold, so only one entry, the first one.
+    // console.log(entries);
     const [entry] = entries;
-    console.log(entry);
+    // console.log(entry);
+
+    // When they are no longer intersecting return -guard clause
+    if (!entry.isIntersecting) return;
+
+    // Replace src attribute(blurry imqge) with data-src attribute(clear image)
+    entry.target.src = entry.target.dataset.src;
+
+    // Remove the lazy-image in css that has the blur effect
+    entry.target.addEventListener("load", function () {
+        entry.target.classList.remove("lazy-img");
+    });
+
+    //  Once the loading of the images is done, we can stop observing
+    observer.unobserve(entry.target);
 }
 
 // 2.  Create the observer
 const imgOberver = new IntersectionObserver(loadImg, {
     root: null,
-    threshold: 0
+    threshold: 0,
+    rootMargin: "200px" //load the images before the threshold is reached, as we want lo lazy load the images but we do not want the user to notice
 });
 
 // 3. Loop over the images and use the observer
