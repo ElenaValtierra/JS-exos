@@ -223,7 +223,8 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 allSections.forEach(function (section) {
     sectionObserver.observe(section);
     //? We need to add the class here and not directly on the HTML doc as some browsers deactivate it.
-    section.classList.add('section--hidden');
+
+    //!hidden for last exer: section.classList.add('section--hidden');
 });
 
 // --------------------------------------
@@ -231,29 +232,29 @@ allSections.forEach(function (section) {
 //* Lazy loading imageResolution - good for performance 
 // we select all the images that have the attribute data-source as shown below (as they are the ones with the full image)
 //* 1 get the images
-const imgTargets = document.querySelectorAll('img[data-src]');
+// const imgTargets = document.querySelectorAll('img[data-src]');
 
-// 4. create the callback function from the imgObserver
-const loadImg = function (entries, observer) {
-    // only one theshold, so only one entry, the first one.
-    // console.log(entries);
-    const [entry] = entries;
-    // console.log(entry);
+// // 4. create the callback function from the imgObserver
+// const loadImg = function (entries, observer) {
+//     // only one theshold, so only one entry, the first one.
+//     // console.log(entries);
+//     const [entry] = entries;
+//     // console.log(entry);
 
-    // When they are no longer intersecting return -guard clause
-    if (!entry.isIntersecting) return;
+//     // When they are no longer intersecting return -guard clause
+//     if (!entry.isIntersecting) return;
 
-    // Replace src attribute(blurry imqge) with data-src attribute(clear image)
-    entry.target.src = entry.target.dataset.src;
+//     // Replace src attribute(blurry imqge) with data-src attribute(clear image)
+//     entry.target.src = entry.target.dataset.src;
 
-    // Remove the lazy-image in css that has the blur effect
-    entry.target.addEventListener("load", function () {
-        entry.target.classList.remove("lazy-img");
-    });
+//     // Remove the lazy-image in css that has the blur effect
+//     entry.target.addEventListener("load", function () {
+//         entry.target.classList.remove("lazy-img");
+//     });
 
-    //  Once the loading of the images is done, we can stop observing
-    observer.unobserve(entry.target);
-}
+//     //  Once the loading of the images is done, we can stop observing
+//     observer.unobserve(entry.target);
+// }
 
 // 2.  Create the observer
 const imgOberver = new IntersectionObserver(loadImg, {
@@ -264,6 +265,23 @@ const imgOberver = new IntersectionObserver(loadImg, {
 
 // 3. Loop over the images and use the observer
 imgTargets.forEach(img => imgOberver.observe(img))
+
+
+// Slider 
+const slides = document.querySelectorAll(".slide");
+const btnLeft = document.querySelector(".slider__btn--left");
+const btnRight = document.querySelector(".slider__btn--right");
+
+const slider = document.querySelector(".slider");
+slider.style.transform = 'scale(0.4) translateX(-800px)';
+slider.style.overflow = 'visible';
+
+slides.forEach((s, i) => {
+    s.style.transform = `translateX(${100 * i}%)`;
+    //  0%, 100%, 200%, 300%...
+});
+
+
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
