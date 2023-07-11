@@ -256,21 +256,24 @@ allSections.forEach(function (section) {
 //     observer.unobserve(entry.target);
 // }
 
-// 2.  Create the observer
-const imgOberver = new IntersectionObserver(loadImg, {
-    root: null,
-    threshold: 0,
-    rootMargin: "200px" //load the images before the threshold is reached, as we want lo lazy load the images but we do not want the user to notice
-});
+// // 2.  Create the observer
+// const imgOberver = new IntersectionObserver(loadImg, {
+//     root: null,
+//     threshold: 0,
+//     rootMargin: "200px" //load the images before the threshold is reached, as we want lo lazy load the images but we do not want the user to notice
+// });
 
-// 3. Loop over the images and use the observer
-imgTargets.forEach(img => imgOberver.observe(img))
+// // 3. Loop over the images and use the observer
+// imgTargets.forEach(img => imgOberver.observe(img))
 
 
 // Slider 
 const slides = document.querySelectorAll(".slide");
 const btnLeft = document.querySelector(".slider__btn--left");
 const btnRight = document.querySelector(".slider__btn--right");
+
+let currSlide = 0;
+const maxSlide = slides.length;
 
 const slider = document.querySelector(".slider");
 slider.style.transform = 'scale(0.4) translateX(-800px)';
@@ -281,7 +284,19 @@ slides.forEach((s, i) => {
     //  0%, 100%, 200%, 300%...
 });
 
+// Next slide
+btnRight.addEventListener("click", function () {
+    if (currSlide === maxSlide - 1) {
+        currSlide = 0;
+    } else {
+        currSlide++;
+    }
 
+    slides.forEach((s, i) => {
+        s.style.transform = `translateX(${100 * (i - currSlide)}%)`;
+        //  -100%, 0%, 100%, 200%
+    });
+})
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Selecting elements
